@@ -254,6 +254,539 @@
   @media(max-width:560px){
     .what-grid,.impact-grid{grid-template-columns:1fr;}
   }
+
+  /* -- GET INVOLVED SECTION -- */
+  #get-involved {
+    background: linear-gradient(135deg, #0A3DB5 0%, #1A5CFF 50%, #0052CC 100%);
+    padding: 90px 5%;
+    position: relative;
+    overflow: hidden;
+  }
+  #get-involved::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .gi-header { text-align: center; margin-bottom: 56px; position: relative; z-index: 1; }
+  .gi-tag {
+    display: inline-block; background: rgba(255,255,255,0.15); color: white;
+    font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 2px;
+    padding: 6px 16px; border-radius: 50px; margin-bottom: 14px;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .gi-header h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(32px, 4.5vw, 52px);
+    color: white; line-height: 1.15; margin-bottom: 14px;
+  }
+  .gi-header h2 em { color: #FFD470; font-style: normal; }
+  .gi-header p { font-size: 16px; color: rgba(255,255,255,0.7); max-width: 520px; margin: 0 auto; line-height: 1.7; }
+
+  .gi-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+    position: relative; z-index: 1;
+  }
+  .gi-card {
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 28px 20px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.25s, background 0.25s, box-shadow 0.25s, border-color 0.25s;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+  }
+  .gi-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255,255,255,0.16);
+    border-color: rgba(255,255,255,0.4);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+  }
+  .gi-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    border-radius: 0 0 20px 20px;
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .gi-card:hover::after { opacity: 1; }
+  .gi-card:nth-child(1)::after { background: #FFD470; }
+  .gi-card:nth-child(2)::after { background: var(--orange); }
+  .gi-card:nth-child(3)::after { background: #4DDBBD; }
+  .gi-card:nth-child(4)::after { background: #FF6B9D; }
+  .gi-card:nth-child(5)::after { background: #A78BFA; }
+
+  .gi-emoji { font-size: 40px; display: block; margin-bottom: 14px; }
+  .gi-card h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 18px; color: white; margin-bottom: 10px; line-height: 1.2;
+  }
+  .gi-card p { font-size: 12.5px; color: rgba(255,255,255,0.65); line-height: 1.65; margin-bottom: 16px; }
+  .gi-btn {
+    display: inline-block;
+    background: white; color: var(--blue-dark);
+    padding: 8px 18px; border-radius: 50px;
+    font-weight: 800; font-size: 12px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    text-decoration: none;
+  }
+  .gi-card:hover .gi-btn {
+    transform: scale(1.05);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  }
+  .gi-card:nth-child(1):hover .gi-btn { background: #FFD470; color: #1A1A1A; }
+  .gi-card:nth-child(2):hover .gi-btn { background: var(--orange); color: white; }
+  .gi-card:nth-child(3):hover .gi-btn { background: #4DDBBD; color: #0B4D42; }
+  .gi-card:nth-child(4):hover .gi-btn { background: #FF6B9D; color: white; }
+  .gi-card:nth-child(5):hover .gi-btn { background: #A78BFA; color: white; }
+
+  @media(max-width:900px) {
+    .gi-grid { grid-template-columns: repeat(2, 1fr); }
+    .gi-grid .gi-card:last-child { grid-column: 1 / -1; max-width: 280px; margin: 0 auto; }
+  }
+  @media(max-width:560px) {
+    .gi-grid { grid-template-columns: 1fr; }
+    .gi-grid .gi-card:last-child { grid-column: auto; max-width: none; }
+  }
+
+  /* -- VOLUNTEER MODAL -- */
+  #vol-modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 10002;
+    background: rgba(0,0,0,0.65); overflow-y: auto;
+    padding: 40px 16px 60px;
+  }
+  #vol-modal-overlay.open { display: block; }
+  .vol-modal-inner {
+    width: 100%; max-width: 560px; margin: 0 auto;
+    background: white; border-radius: 20px;
+    overflow: hidden; position: relative;
+  }
+  .vol-modal-close {
+    position: absolute; top: 14px; right: 18px; z-index: 10;
+    background: var(--off-white); border: none; width: 34px; height: 34px;
+    border-radius: 50%; font-size: 18px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted); transition: transform 0.2s;
+  }
+  .vol-modal-close:hover { transform: scale(1.1); }
+  .vol-modal-body { padding: 36px 32px 44px; }
+  .vol-head { text-align: center; margin-bottom: 28px; }
+  .vol-head .vol-emoji { font-size: 44px; display: block; margin-bottom: 12px; }
+  .vol-head h3 { font-family: 'Fredoka One', cursive; font-size: 26px; color: var(--text); margin-bottom: 8px; }
+  .vol-head p { font-size: 14px; color: var(--text-muted); line-height: 1.65; max-width: 380px; margin: 0 auto; }
+  .vol-form-group { margin-bottom: 15px; }
+  .vol-form-group label { display: block; font-weight: 800; font-size: 11.5px; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .vol-form-group input, .vol-form-group select, .vol-form-group textarea {
+    width: 100%; padding: 11px 14px; border: 2px solid var(--border);
+    border-radius: 10px; font-family: 'Nunito', sans-serif; font-size: 14px;
+    color: var(--text); background: var(--off-white); outline: none; transition: border-color 0.2s;
+  }
+  .vol-form-group input:focus, .vol-form-group select:focus, .vol-form-group textarea:focus { border-color: var(--blue); background: white; }
+  .vol-form-group textarea { height: 90px; resize: vertical; }
+  .vol-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .vol-submit-btn {
+    width: 100%; padding: 14px; background: linear-gradient(135deg, #FF6B9D, #e0508c);
+    color: white; border: none; border-radius: 12px; font-weight: 800;
+    font-size: 15px; font-family: 'Nunito', sans-serif; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(255,107,157,0.35); margin-top: 6px;
+  }
+  .vol-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,157,0.45); }
+  #vol-success { display: none; text-align: center; padding: 20px 0; }
+  #vol-success .big-emoji { font-size: 48px; display: block; margin-bottom: 12px; }
+  #vol-success h4 { font-family: 'Fredoka One', cursive; font-size: 22px; color: var(--text); margin-bottom: 8px; }
+  #vol-success p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+  /* -- DONATE MODAL -- */
+  #donate-modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 10003;
+    background: rgba(0,0,0,0.65); overflow-y: auto;
+    padding: 40px 16px 60px;
+  }
+  #donate-modal-overlay.open { display: block; }
+  .donate-modal-inner {
+    width: 100%; max-width: 520px; margin: 0 auto;
+    background: white; border-radius: 20px;
+    overflow: hidden; position: relative;
+  }
+  .donate-modal-close {
+    position: absolute; top: 14px; right: 18px; z-index: 10;
+    background: var(--off-white); border: none; width: 34px; height: 34px;
+    border-radius: 50%; font-size: 18px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted); transition: transform 0.2s;
+  }
+  .donate-modal-close:hover { transform: scale(1.1); }
+  .donate-modal-body { padding: 36px 32px 44px; text-align: center; }
+  .donate-modal-body .big-emoji { font-size: 52px; display: block; margin-bottom: 14px; }
+  .donate-modal-body h3 { font-family: 'Fredoka One', cursive; font-size: 28px; color: var(--text); margin-bottom: 12px; }
+  .donate-modal-body > p { font-size: 15px; color: var(--text-muted); line-height: 1.7; max-width: 380px; margin: 0 auto 28px; }
+  .donate-amounts {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; text-align: center;
+  }
+  .donate-amt {
+    border: 2.5px solid var(--border); border-radius: 14px; padding: 16px 10px;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .donate-amt:hover, .donate-amt.selected { border-color: var(--orange); background: var(--orange-light); }
+  .donate-amt .amt-num { font-family: 'Fredoka One', cursive; font-size: 22px; color: var(--blue); display: block; }
+  .donate-amt .amt-label { font-size: 11px; color: var(--text-muted); font-weight: 700; margin-top: 4px; display: block; }
+  .donate-cta {
+    display: block; width: 100%; padding: 15px;
+    background: linear-gradient(135deg, #A78BFA, #7C3AED);
+    color: white; border: none; border-radius: 12px;
+    font-weight: 800; font-size: 16px; font-family: 'Nunito', sans-serif;
+    cursor: pointer; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(124,58,237,0.3);
+  }
+  .donate-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(124,58,237,0.45); }
+  .donate-note { font-size: 12px; color: var(--text-muted); margin-top: 14px; }
+
+  /* -- Interest Form Modal -- */
+  #interest-modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 10000;
+    background: rgba(0,0,0,0.65); overflow-y: auto;
+    padding: 40px 16px 60px;
+  }
+  #interest-modal-overlay.open { display: block; }
+  .interest-modal-inner {
+    width: 100%; max-width: 720px; margin: 0 auto;
+    background: #F5EFE4; border-radius: 20px;
+    overflow: hidden; position: relative;
+  }
+  .interest-modal-close {
+    position: absolute; top: 14px; right: 18px; z-index: 10;
+    background: white; border: none; width: 36px; height: 36px;
+    border-radius: 50%; font-size: 20px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15); color: #333;
+    transition: transform 0.2s;
+  }
+  .interest-modal-close:hover { transform: scale(1.1); }
+  .interest-modal-body {
+    padding: 36px 32px 48px;
+  }
+
+  /* Interest form internal styles */
+  .if-root *, .if-root *::before, .if-root *::after { box-sizing: border-box; }
+  .if-root {
+    --amber: #E8860A; --amber-lt: #FFF3DC; --amber-dk: #7A4500;
+    --teal: #0B7A6A; --teal-lt: #D6F5F0; --teal-dk: #04332B;
+    --ink: #1A1208; --muted: #6B6254; --border: #E0D8CC;
+    --surface: #FDFAF5; --r: 10px;
+    --font-display: 'Fredoka One', cursive;
+    --font-body: 'Nunito', sans-serif;
+    font-family: var(--font-body);
+    color: var(--ink);
+  }
+  .if-hero { text-align: center; margin-bottom: 2rem; }
+  .if-badge {
+    display: inline-block; background: var(--amber); color: #fff;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 5px 14px; border-radius: 40px; margin-bottom: 1rem;
+  }
+  .if-hero h2 {
+    font-family: var(--font-display); font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 700; color: var(--ink); margin-bottom: 0.5rem; line-height: 1.2;
+  }
+  .if-hero h2 span { color: var(--amber); }
+  .if-hero p { font-size: 0.9375rem; color: var(--muted); line-height: 1.65; max-width: 500px; margin: 0 auto; }
+
+  .if-progress-wrap { width: 100%; height: 3px; background: var(--border); border-radius: 2px; margin-bottom: 1.5rem; overflow: hidden; }
+  .if-progress-bar { height: 100%; background: var(--amber); border-radius: 2px; transition: width 0.4s cubic-bezier(0.4,0,0.2,1); }
+
+  .if-stepper { display: flex; align-items: center; margin-bottom: 1.75rem; }
+  .if-step-item { display: flex; flex-direction: column; align-items: center; flex: 1; position: relative; }
+  .if-step-circle {
+    width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; font-size: 12px; font-weight: 700;
+    background: #C9C0B4; color: #fff; transition: background 0.3s, transform 0.2s; position: relative; z-index: 2;
+  }
+  .if-step-item.done .if-step-circle { background: var(--teal); }
+  .if-step-item.active .if-step-circle { background: var(--amber); transform: scale(1.12); box-shadow: 0 0 0 4px rgba(232,134,10,0.18); }
+  .if-step-label { margin-top: 5px; font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #C9C0B4; white-space: nowrap; }
+  .if-step-item.active .if-step-label { color: var(--amber); }
+  .if-step-item.done .if-step-label { color: var(--teal); }
+  .if-connector { flex: 1; height: 2px; background: #C9C0B4; transition: background 0.4s; position: relative; top: -14px; }
+  .if-connector.done { background: var(--teal); }
+
+  .if-card { background: #fff; border-radius: 14px; border: 1px solid var(--border); padding: 2rem; }
+  .if-section-header { margin-bottom: 1.5rem; padding-bottom: 0.9rem; border-bottom: 1px solid var(--border); }
+  .if-section-header h3 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+  .if-section-header p { font-size: 0.85rem; color: var(--muted); }
+
+  .if-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .if-form-grid .if-full { grid-column: 1 / -1; }
+  .if-field { display: flex; flex-direction: column; gap: 5px; }
+  .if-field label { font-size: 0.8rem; font-weight: 700; color: var(--ink); letter-spacing: 0.02em; }
+  .if-field .req { color: var(--amber); margin-left: 2px; }
+  .if-field input, .if-field select, .if-field textarea {
+    font-family: var(--font-body); font-size: 0.9rem; color: var(--ink);
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: var(--r); padding: 9px 13px; width: 100%; outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s; appearance: none; -webkit-appearance: none;
+  }
+  .if-field input:focus, .if-field select:focus, .if-field textarea:focus {
+    border-color: var(--amber); box-shadow: 0 0 0 3px rgba(232,134,10,0.12); background: #fff;
+  }
+  .if-field textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+  .if-field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6254' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 13px center; padding-right: 34px; cursor: pointer;
+  }
+  .if-field input::placeholder, .if-field textarea::placeholder { color: #B0A898; }
+  .if-field .if-hint { font-size: 0.72rem; color: var(--muted); }
+  .if-field .if-error { font-size: 0.72rem; color: #C0392B; display: none; }
+  .if-field.invalid .if-error { display: block; }
+  .if-field.invalid input, .if-field.invalid select, .if-field.invalid textarea { border-color: #C0392B; }
+
+  .if-checkbox-group { display: flex; flex-direction: column; gap: 7px; }
+  .if-checkbox-row {
+    display: flex; align-items: center; gap: 9px; padding: 8px 11px;
+    border: 1.5px solid var(--border); border-radius: var(--r); cursor: pointer;
+    background: var(--surface); transition: border-color 0.2s, background 0.2s; user-select: none;
+  }
+  .if-checkbox-row:hover { border-color: var(--amber); background: #FFFBF2; }
+  .if-checkbox-row input[type="checkbox"] { width: 15px; height: 15px; border-radius: 4px; flex-shrink: 0; cursor: pointer; accent-color: var(--amber); padding: 0; box-shadow: none; }
+  .if-checkbox-row span { font-size: 0.85rem; color: var(--ink); }
+  .if-checkbox-row:has(input:checked) { border-color: var(--amber); background: var(--amber-lt); }
+
+  .if-radio-group { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+  .if-radio-btn {
+    display: flex; align-items: center; gap: 7px; padding: 8px 11px;
+    border: 1.5px solid var(--border); border-radius: var(--r); cursor: pointer;
+    background: var(--surface); transition: border-color 0.2s, background 0.2s; user-select: none;
+  }
+  .if-radio-btn:hover { border-color: var(--amber); background: #FFFBF2; }
+  .if-radio-btn input[type="radio"] { width: 14px; height: 14px; flex-shrink: 0; accent-color: var(--amber); padding: 0; box-shadow: none; cursor: pointer; }
+  .if-radio-btn span { font-size: 0.85rem; color: var(--ink); }
+  .if-radio-btn:has(input:checked) { border-color: var(--amber); background: var(--amber-lt); }
+
+  .if-nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+  .if-btn { font-family: var(--font-body); font-size: 0.9rem; font-weight: 700; padding: 10px 24px; border-radius: 8px; border: none; cursor: pointer; transition: opacity 0.2s, transform 0.15s; }
+  .if-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .if-btn-back { background: transparent; color: var(--muted); border: 1.5px solid var(--border); }
+  .if-btn-next { background: var(--amber); color: #fff; }
+  .if-btn-submit { background: var(--teal); color: #fff; }
+  .if-btn-ghost { opacity: 0; pointer-events: none; }
+
+  .if-step-view { display: none; }
+  .if-step-view.if-active { display: block; }
+
+  .if-success { text-align: center; padding: 2rem 1rem; }
+  .if-success-icon { width: 68px; height: 68px; border-radius: 50%; background: var(--teal-lt); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; }
+  .if-success h3 { font-family: var(--font-display); font-size: 1.6rem; color: var(--ink); margin-bottom: 0.5rem; }
+  .if-success p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; max-width: 380px; margin: 0 auto; }
+  .if-tag-pill { display: inline-block; background: var(--teal-lt); color: var(--teal-dk); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; }
+
+  @media (max-width: 540px) {
+    .interest-modal-body { padding: 24px 16px 36px; }
+    .if-form-grid { grid-template-columns: 1fr; }
+    .if-form-grid .if-full { grid-column: 1; }
+    .if-radio-group { grid-template-columns: 1fr; }
+    .if-step-label { display: none; }
+  }
+
+  /* -- NGO Partner Form Modal -- */
+  #np-modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 10001;
+    background: rgba(0,0,0,0.65); overflow-y: auto;
+    padding: 40px 16px 60px;
+  }
+  #np-modal-overlay.open { display: block; }
+  .np-modal-inner {
+    width: 100%; max-width: 760px; margin: 0 auto;
+    background: #F9FAFF; border-radius: 20px;
+    overflow: hidden; position: relative;
+  }
+  .np-modal-close {
+    position: absolute; top: 14px; right: 18px; z-index: 10;
+    background: white; border: none; width: 36px; height: 36px;
+    border-radius: 50%; font-size: 20px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15); color: #333;
+    transition: transform 0.2s;
+  }
+  .np-modal-close:hover { transform: scale(1.1); }
+  .np-modal-body { padding: 40px 36px 52px; }
+
+  /* root scope */
+  .np-root {
+    --np-blue: #1A5CFF; --np-blue-dk: #0A3DB5; --np-blue-lt: #E8EEFF;
+    --np-orange: #FF6B1A; --np-orange-lt: #FFF0E8;
+    --np-text: #1C1C3A; --np-muted: #5A5A7A;
+    --np-border: #D0D8FF; --np-surface: #F9FAFF;
+    --np-green: #0B7A6A; --np-green-lt: #D6F5F0;
+    --np-danger: #C0392B;
+    --np-r: 10px;
+    font-family: 'Nunito', sans-serif;
+    color: var(--np-text);
+  }
+
+  /* hero */
+  .np-hero { text-align: center; margin-bottom: 2rem; }
+  .np-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--np-blue-lt); border: 2px solid var(--np-blue);
+    color: var(--np-blue); font-weight: 800; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    padding: 6px 16px; border-radius: 50px; margin-bottom: 1rem;
+  }
+  .np-badge .np-dot { width: 8px; height: 8px; background: var(--np-orange); border-radius: 50%; }
+  .np-hero h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    color: var(--np-text); margin-bottom: 0.5rem; line-height: 1.2;
+  }
+  .np-hero h2 em { color: var(--np-orange); font-style: normal; }
+  .np-hero p { font-size: 0.9375rem; color: var(--np-muted); line-height: 1.7; max-width: 520px; margin: 0 auto; }
+
+  /* pills */
+  .np-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .np-pill {
+    padding: 5px 14px; border-radius: 40px; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    border: 2px solid var(--np-border); color: var(--np-muted); background: transparent; transition: all 0.3s;
+  }
+  .np-pill.active { background: var(--np-orange); color: #fff; border-color: var(--np-orange); }
+  .np-pill.done   { background: var(--np-blue-lt); color: var(--np-blue); border-color: var(--np-border); }
+
+  /* progress */
+  .np-progress-wrap { width: 100%; height: 3px; background: var(--np-border); border-radius: 2px; margin-bottom: 1.75rem; overflow: hidden; }
+  .np-progress-fill { height: 100%; background: linear-gradient(90deg, var(--np-blue), var(--np-orange)); border-radius: 2px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); }
+
+  /* card */
+  .np-card { background: white; border: 2.5px solid var(--np-border); border-radius: 16px; overflow: hidden; }
+  .np-card-header {
+    padding: 1.75rem 2rem 1.25rem; border-bottom: 2px solid var(--np-border);
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+    background: linear-gradient(135deg, var(--np-blue-lt) 0%, white 100%);
+  }
+  .np-card-header h3 { font-family: 'Fredoka One', cursive; font-size: 1.35rem; color: var(--np-text); margin-bottom: 3px; }
+  .np-card-header p { font-size: 0.85rem; color: var(--np-muted); }
+  .np-step-counter { font-size: 11px; font-weight: 800; color: var(--np-blue); letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; padding-top: 4px; }
+  .np-card-body { padding: 1.75rem 2rem; }
+  .np-card-footer { padding: 1.25rem 2rem 1.75rem; border-top: 2px solid var(--np-border); display: flex; justify-content: space-between; align-items: center; }
+
+  /* form grid */
+  .np-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+  .np-full { grid-column: 1 / -1; }
+  .np-field { display: flex; flex-direction: column; gap: 5px; }
+  .np-field label { font-size: 0.8rem; font-weight: 800; color: var(--np-text); letter-spacing: 0.02em; text-transform: uppercase; }
+  .np-req { color: var(--np-orange); margin-left: 2px; }
+  .np-field input, .np-field select, .np-field textarea {
+    font-family: 'Nunito', sans-serif; font-size: 0.9rem; color: var(--np-text);
+    background: var(--np-surface); border: 2px solid var(--np-border);
+    border-radius: var(--np-r); padding: 10px 13px; width: 100%; outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s; appearance: none; -webkit-appearance: none;
+  }
+  .np-field input:focus, .np-field select:focus, .np-field textarea:focus {
+    border-color: var(--np-blue); box-shadow: 0 0 0 3px rgba(26,92,255,0.1); background: white;
+  }
+  .np-field textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+  .np-field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A5A7A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 13px center; padding-right: 34px; cursor: pointer;
+  }
+  .np-field input::placeholder, .np-field textarea::placeholder { color: #A0A8C0; }
+  .np-hint { font-size: 0.72rem; color: var(--np-muted); }
+  .np-error { font-size: 0.72rem; color: var(--np-danger); display: none; }
+  .np-field.invalid .np-error { display: block; }
+  .np-field.invalid input, .np-field.invalid select, .np-field.invalid textarea { border-color: var(--np-danger); }
+
+  /* check/radio tiles */
+  .np-check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .np-check-tile {
+    display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px;
+    border: 2px solid var(--np-border); border-radius: var(--np-r); cursor: pointer;
+    background: var(--np-surface); transition: border-color 0.2s, background 0.2s; user-select: none;
+  }
+  .np-check-tile:hover { border-color: var(--np-blue); background: var(--np-blue-lt); }
+  .np-check-tile input { width: 15px; height: 15px; flex-shrink: 0; accent-color: var(--np-blue); cursor: pointer; padding: 0; box-shadow: none; margin-top: 2px; border: none; background: transparent; }
+  .np-tile-label { font-size: 0.875rem; color: var(--np-text); font-weight: 600; }
+  .np-tile-sub   { font-size: 0.72rem; color: var(--np-muted); }
+  .np-check-tile:has(input:checked) { border-color: var(--np-blue); background: var(--np-blue-lt); }
+  .np-check-tile:has(input:checked) .np-tile-label { color: var(--np-blue-dk); }
+
+  .np-radio-row {
+    display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+    border: 2px solid var(--np-border); border-radius: var(--np-r); cursor: pointer;
+    background: var(--np-surface); transition: border-color 0.2s, background 0.2s; user-select: none;
+  }
+  .np-radio-row:hover { border-color: var(--np-orange); background: var(--np-orange-lt); }
+  .np-radio-row input { accent-color: var(--np-orange); cursor: pointer; width: 15px; height: 15px; flex-shrink: 0; padding: 0; box-shadow: none; border: none; background: transparent; }
+  .np-radio-row span { font-size: 0.875rem; color: var(--np-text); }
+  .np-radio-row:has(input:checked) { border-color: var(--np-orange); background: var(--np-orange-lt); }
+  .np-radio-row:has(input:checked) span { font-weight: 700; color: var(--np-text); }
+  .np-radio-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .np-radio-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+
+  /* callout */
+  .np-callout {
+    background: var(--np-blue-lt); border: 2px solid var(--np-border);
+    border-radius: var(--np-r); padding: 12px 16px; display: flex;
+    gap: 10px; align-items: flex-start; margin-bottom: 1.5rem;
+  }
+  .np-callout svg { flex-shrink: 0; color: var(--np-blue); margin-top: 1px; }
+  .np-callout p { font-size: 0.8125rem; color: var(--np-text); line-height: 1.55; }
+
+  .np-divider { height: 2px; background: var(--np-border); margin: 1.25rem 0; }
+
+  /* buttons */
+  .np-btn {
+    font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 800;
+    padding: 10px 24px; border-radius: 50px; border: none; cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.2s; letter-spacing: 0.02em;
+  }
+  .np-btn:hover { transform: translateY(-2px); }
+  .np-btn-ghost { opacity: 0; pointer-events: none; }
+  .np-btn-back { background: transparent; color: var(--np-muted); border: 2px solid var(--np-border); border-radius: 50px; }
+  .np-btn-next { background: linear-gradient(135deg, var(--np-blue), var(--np-blue-dk)); color: #fff; box-shadow: 0 4px 14px rgba(26,92,255,0.3); }
+  .np-btn-submit { background: linear-gradient(135deg, var(--np-orange), #D94E00); color: #fff; box-shadow: 0 4px 14px rgba(255,107,26,0.35); }
+
+  /* char counter */
+  .np-char-row { display: flex; justify-content: space-between; align-items: center; }
+  .np-char-count { font-size: 0.72rem; color: var(--np-muted); }
+
+  /* step views */
+  .np-step-view { display: none; }
+  .np-step-view.np-active { display: block; animation: npFadeUp 0.3s ease both; }
+  @keyframes npFadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+  /* success */
+  .np-success { text-align: center; padding: 2rem 1rem; }
+  .np-success-emblem {
+    width: 76px; height: 76px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--np-blue-lt), var(--np-orange-lt));
+    border: 2px solid var(--np-border);
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;
+  }
+  .np-success h3 { font-family: 'Fredoka One', cursive; font-size: 1.8rem; color: var(--np-text); margin-bottom: 0.5rem; }
+  .np-success p { font-size: 0.9rem; color: var(--np-muted); line-height: 1.65; max-width: 400px; margin: 0 auto; }
+  .np-success-tag {
+    display: inline-block; background: var(--np-orange-lt); color: var(--np-orange);
+    border: 2px solid #FFD0A8; font-size: 11px; font-weight: 800;
+    letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 14px;
+    border-radius: 40px; margin-bottom: 1.25rem;
+  }
+  .np-next-steps { margin-top: 1.75rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; text-align: left; }
+  .np-next-step-card { background: var(--np-surface); border: 2px solid var(--np-border); border-radius: 12px; padding: 14px; }
+  .np-next-step-num { font-size: 11px; font-weight: 800; color: var(--np-blue); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+  .np-next-step-card p { font-size: 0.8rem; color: var(--np-muted); line-height: 1.5; }
+
+  @media (max-width: 560px) {
+    .np-modal-body { padding: 24px 16px 40px; }
+    .np-form-grid { grid-template-columns: 1fr; }
+    .np-full { grid-column: 1; }
+    .np-check-grid, .np-radio-grid-2, .np-radio-grid-3 { grid-template-columns: 1fr; }
+    .np-next-steps { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -269,8 +802,9 @@
     <li><a href="#what">Sessions</a></li>
     <li><a href="#who">Who It's For</a></li>
     <li><a href="#how">How It Works</a></li>
+    <li><a href="#get-involved" style="color:var(--orange) !important;">Get Involved</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="https://forms.gle/2GY6RqVd5CRkgDxc7" target="_blank" class="nav-cta">Apply Now ✦</a></li>
+    <li><a href="https://forms.gle/2GY6RqVd5CRkgDxc7" target="_blank" class="nav-cta">Apply Now ?</a></li>
   </ul>
 </nav>
 
@@ -330,11 +864,11 @@
   <div class="hero-content">
     <div class="hero-badge"><span class="dot"></span> Empowering India's Future Innovators</div>
     <h1>Where Young <span class="highlight">Dreamers</span><br>Become Doers</h1>
-    <div class="hero-tagline">✦ Be the student who does not wait for opportunities — build them.</div>
+    <div class="hero-tagline">? Be the student who does not wait for opportunities — build them.</div>
     <p class="hero-desc">NavaChar is an entrepreneurship initiative that sparks innovation in school students from underserved communities. We teach young minds (ages 12–16) to spot real problems and build real solutions.</p>
     <div class="hero-btns">
-      <a href="https://forms.gle/2GY6RqVd5CRkgDxc7" target="_blank" class="btn-primary">🚀 Apply Now — It's Free!</a>
-      <a href="#about" class="btn-secondary">Learn More ↓</a>
+      <a href="https://forms.gle/2GY6RqVd5CRkgDxc7" target="_blank" class="btn-primary">?? Apply Now — It's Free!</a>
+      <a href="#about" class="btn-secondary">Learn More ?</a>
     </div>
     <div class="hero-stats">
       <div class="stat-box"><span class="num">12–16</span><span class="label">Age Group</span></div>
@@ -352,12 +886,12 @@
         <line x1="-13" y1="7" x2="13" y2="7" stroke="#1A5CFF" stroke-width="3"/>
         <line x1="-13" y1="15" x2="13" y2="15" stroke="#1A5CFF" stroke-width="3"/>
         <circle cx="0" cy="-70" r="64" fill="none" stroke="#FF6B1A" stroke-width="2" stroke-dasharray="8,6" opacity="0.5"/>
-        <g transform="rotate(0) translate(112,0)"><rect x="-18" y="-18" width="36" height="36" rx="9" fill="#FF6B1A" opacity="0.15" stroke="#FF6B1A" stroke-width="1.5"/><text x="0" y="7" text-anchor="middle" font-size="18">🎯</text></g>
-        <g transform="rotate(60) translate(112,0)"><rect x="-18" y="-18" width="36" height="36" rx="9" fill="#1A5CFF" opacity="0.15" stroke="#1A5CFF" stroke-width="1.5"/><text x="0" y="7" text-anchor="middle" font-size="18">💡</text></g>
-        <g transform="rotate(120) translate(112,0)"><rect x="-18" y="-18" width="36" height="36" rx="9" fill="#22A855" opacity="0.15" stroke="#22A855" stroke-width="1.5"/><text x="0" y="7" text-anchor="middle" font-size="18">🚀</text></g>
-        <g transform="rotate(180) translate(112,0)"><rect x="-18" y="-18" width="36" height="36" rx="9" fill="#FF6B1A" opacity="0.15" stroke="#FF6B1A" stroke-width="1.5"/><text x="0" y="7" text-anchor="middle" font-size="18">🏆</text></g>
-        <g transform="rotate(240) translate(112,0)"><rect x="-18" y="-18" width="36" height="36" rx="9" fill="#1A5CFF" opacity="0.15" stroke="#1A5CFF" stroke-width="1.5"/><text x="0" y="7" text-anchor="middle" font-size="18">🤝</text></g>
-        <g transform="rotate(300) translate(112,0)"><rect x="-18" y="-18" width="36" height="36" rx="9" fill="#FF6B1A" opacity="0.15" stroke="#FF6B1A" stroke-width="1.5"/><text x="0" y="7" text-anchor="middle" font-size="18">🌱</text></g>
+        <g transform="rotate(0) translate(112,0)"><rect x="-18" y="-18" width="36" height="36" rx="9" fill="#FF6B1A" opacity="0.15" stroke="#FF6B1A" stroke-width="1.5"/><text x="0" y="7" text-anchor="middle" font-size="18">??</text></g>
+        <g transform="rotate(60) translate(112,0)"><rect x="-18" y="-18" width="36" height="36" rx="9" fill="#1A5CFF" opacity="0.15" stroke="#1A5CFF" stroke-width="1.5"/><text x="0" y="7" text-anchor="middle" font-size="18">??</text></g>
+        <g transform="rotate(120) translate(112,0)"><rect x="-18" y="-18" width="36" height="36" rx="9" fill="#22A855" opacity="0.15" stroke="#22A855" stroke-width="1.5"/><text x="0" y="7" text-anchor="middle" font-size="18">??</text></g>
+        <g transform="rotate(180) translate(112,0)"><rect x="-18" y="-18" width="36" height="36" rx="9" fill="#FF6B1A" opacity="0.15" stroke="#FF6B1A" stroke-width="1.5"/><text x="0" y="7" text-anchor="middle" font-size="18">??</text></g>
+        <g transform="rotate(240) translate(112,0)"><rect x="-18" y="-18" width="36" height="36" rx="9" fill="#1A5CFF" opacity="0.15" stroke="#1A5CFF" stroke-width="1.5"/><text x="0" y="7" text-anchor="middle" font-size="18">??</text></g>
+        <g transform="rotate(300) translate(112,0)"><rect x="-18" y="-18" width="36" height="36" rx="9" fill="#FF6B1A" opacity="0.15" stroke="#FF6B1A" stroke-width="1.5"/><text x="0" y="7" text-anchor="middle" font-size="18">??</text></g>
         <g transform="translate(0,62)">
           <circle cx="0" cy="-10" r="17" fill="#1A5CFF" opacity="0.18" stroke="#1A5CFF" stroke-width="2"/>
           <line x1="0" y1="7" x2="0" y2="42" stroke="#1A5CFF" stroke-width="3"/>
@@ -373,21 +907,73 @@
   </div>
 </section>
 
+<!-- GET INVOLVED -->
+<section id="get-involved">
+  <div class="gi-header fade-in">
+    <div class="gi-tag">? Take Action</div>
+    <h2>Get <em>Involved</em> with NavaChar</h2>
+    <p>There are many ways to be part of this movement. Choose what fits you best — every contribution matters.</p>
+  </div>
+  <div class="gi-grid">
+
+    <!-- 1. Apply as a Student -->
+    <a href="https://forms.gle/2GY6RqVd5CRkgDxc7" target="_blank" class="gi-card fade-in">
+      <span class="gi-emoji">??</span>
+      <h3>Apply as a Student</h3>
+      <p>Ages 12–16 from underserved communities. Join the cohort and build your first real solution.</p>
+      <span class="gi-btn">Apply Now ?</span>
+    </a>
+
+    <!-- 2. Partner with Us -->
+    <a href="#" onclick="openPartnerForm();return false;" class="gi-card fade-in">
+      <span class="gi-emoji">??</span>
+      <h3>Partner with Us</h3>
+      <p>NGOs, foundations & organisations — co-create programmes and expand our reach together.</p>
+      <span class="gi-btn">Partner with Us ?</span>
+    </a>
+
+    <!-- 3. Bring to Your School -->
+    <a href="#" onclick="openInterestForm();return false;" class="gi-card fade-in">
+      <span class="gi-emoji">??</span>
+      <h3>Bring to Your School</h3>
+      <p>Teachers & school leaders — bring NavaChar's entrepreneurship programme to your students.</p>
+      <span class="gi-btn">Invite NavaChar ?</span>
+    </a>
+
+    <!-- 4. Volunteer -->
+    <a href="#" onclick="openVolunteerForm();return false;" class="gi-card fade-in">
+      <span class="gi-emoji">??</span>
+      <h3>Volunteer</h3>
+      <p>Mentors, facilitators, professionals — share your time and expertise with young innovators.</p>
+      <span class="gi-btn">Volunteer ?</span>
+    </a>
+
+    <!-- 5. Donate -->
+    <a href="#" onclick="openDonateModal();return false;" class="gi-card fade-in">
+      <span class="gi-emoji">??</span>
+      <h3>Donate</h3>
+      <p>Every rupee helps a student discover their potential. Support NavaChar's mission today.</p>
+      <span class="gi-btn">Support Us ?</span>
+    </a>
+
+  </div>
+</section>
+
 <!-- ABOUT -->
 <section id="about">
   <div class="about-grid">
     <div class="fade-in">
       <div class="about-card">
         <div class="about-icon-row">
-          <div class="about-icon blue">🏫</div>
-          <div class="about-icon orange">💡</div>
+          <div class="about-icon blue">??</div>
+          <div class="about-icon orange">??</div>
         </div>
         <div class="about-quote">"Innovation does not begin in boardrooms — it begins in classrooms, with curious young minds who dare to think differently."</div>
         <div class="quad-grid">
-          <div class="quad-item"><div class="qi-emoji">🌟</div><span class="qi-label">Spark Curiosity</span></div>
-          <div class="quad-item"><div class="qi-emoji">🌍</div><span class="qi-label">Create Impact</span></div>
-          <div class="quad-item"><div class="qi-emoji">🔨</div><span class="qi-label">Build Solutions</span></div>
-          <div class="quad-item"><div class="qi-emoji">🚀</div><span class="qi-label">Lead Change</span></div>
+          <div class="quad-item"><div class="qi-emoji">??</div><span class="qi-label">Spark Curiosity</span></div>
+          <div class="quad-item"><div class="qi-emoji">??</div><span class="qi-label">Create Impact</span></div>
+          <div class="quad-item"><div class="qi-emoji">??</div><span class="qi-label">Build Solutions</span></div>
+          <div class="quad-item"><div class="qi-emoji">??</div><span class="qi-label">Lead Change</span></div>
         </div>
       </div>
     </div>
@@ -398,11 +984,11 @@
       <p>In a world that's constantly evolving, young minds must move beyond memorizing answers and start asking the right questions — identifying real-world problems and designing meaningful solutions.</p>
       <p>We guide students to <strong>observe challenges within their communities</strong>, think critically, and develop a future-ready entrepreneurial mindset — becoming proactive changemakers, not passive learners.</p>
       <div class="value-pills">
-        <div class="pill blue">🎯 Problem-Solving</div>
-        <div class="pill orange">💡 Creativity</div>
-        <div class="pill blue">🤝 Collaboration</div>
-        <div class="pill orange">📈 Leadership</div>
-        <div class="pill blue">🔄 Adaptability</div>
+        <div class="pill blue">?? Problem-Solving</div>
+        <div class="pill orange">?? Creativity</div>
+        <div class="pill blue">?? Collaboration</div>
+        <div class="pill orange">?? Leadership</div>
+        <div class="pill blue">?? Adaptability</div>
       </div>
     </div>
   </div>
@@ -416,12 +1002,12 @@
     <p class="section-sub" style="margin:0 auto;">Each session is hands-on, fun, and deeply practical — turning abstract ideas into real community solutions.</p>
   </div>
   <div class="what-grid">
-    <div class="what-card fade-in"><div class="what-num">01</div><div class="what-icon">🔍</div><h3>Spotting Real Problems</h3><p>Students learn to observe their environment with fresh eyes — identifying everyday challenges in their community that others overlook, from sanitation to education gaps.</p></div>
-    <div class="what-card fade-in"><div class="what-num">02</div><div class="what-icon">🗺️</div><h3>Design Thinking Basics</h3><p>We introduce design thinking in a student-friendly way — empathize, define, ideate, prototype, and test. Simple steps for big ideas.</p></div>
-    <div class="what-card fade-in"><div class="what-num">03</div><div class="what-icon">🤝</div><h3>Team Collaboration</h3><p>Students form teams, assign roles, and work together — building communication, leadership, and teamwork skills along the way.</p></div>
-    <div class="what-card fade-in"><div class="what-num">04</div><div class="what-icon">💻</div><h3>Build a Solution</h3><p>From idea to action — students prototype their solutions using low-cost materials, sketches, or simple models, making ideas tangible and real.</p></div>
-    <div class="what-card fade-in"><div class="what-num">05</div><div class="what-icon">🎤</div><h3>Present & Pitch</h3><p>Every student gets to stand up and pitch their idea — building confidence, public speaking, and the ability to communicate a vision clearly.</p></div>
-    <div class="what-card fade-in"><div class="what-num">06</div><div class="what-icon">🌱</div><h3>Community Impact Projects</h3><p>The best ideas go beyond the classroom. Students are guided to think about how their solutions can create a real positive impact locally.</p></div>
+    <div class="what-card fade-in"><div class="what-num">01</div><div class="what-icon">??</div><h3>Spotting Real Problems</h3><p>Students learn to observe their environment with fresh eyes — identifying everyday challenges in their community that others overlook, from sanitation to education gaps.</p></div>
+    <div class="what-card fade-in"><div class="what-num">02</div><div class="what-icon">???</div><h3>Design Thinking Basics</h3><p>We introduce design thinking in a student-friendly way — empathize, define, ideate, prototype, and test. Simple steps for big ideas.</p></div>
+    <div class="what-card fade-in"><div class="what-num">03</div><div class="what-icon">??</div><h3>Team Collaboration</h3><p>Students form teams, assign roles, and work together — building communication, leadership, and teamwork skills along the way.</p></div>
+    <div class="what-card fade-in"><div class="what-num">04</div><div class="what-icon">??</div><h3>Build a Solution</h3><p>From idea to action — students prototype their solutions using low-cost materials, sketches, or simple models, making ideas tangible and real.</p></div>
+    <div class="what-card fade-in"><div class="what-num">05</div><div class="what-icon">??</div><h3>Present & Pitch</h3><p>Every student gets to stand up and pitch their idea — building confidence, public speaking, and the ability to communicate a vision clearly.</p></div>
+    <div class="what-card fade-in"><div class="what-num">06</div><div class="what-icon">??</div><h3>Community Impact Projects</h3><p>The best ideas go beyond the classroom. Students are guided to think about how their solutions can create a real positive impact locally.</p></div>
   </div>
 </section>
 
@@ -429,15 +1015,15 @@
 <section id="skills">
   <div style="text-align:center; margin-bottom:48px;">
     <div class="section-tag">Future-Ready Skills</div>
-    <h2 class="section-title">Skills You'll <span>Unlock</span> 🔓</h2>
+    <h2 class="section-title">Skills You'll <span>Unlock</span> ??</h2>
     <p class="section-sub" style="margin:0 auto; color:rgba(255,255,255,0.75);">NavaChar builds the skills that no textbook teaches — but every future leader needs.</p>
   </div>
   <div class="skills-grid">
-    <div class="skill-card fade-in"><span class="skill-emoji">🧠</span><h4>Critical Thinking</h4><p>Analyze problems deeply and think before you act</p></div>
-    <div class="skill-card fade-in"><span class="skill-emoji">🎨</span><h4>Creativity</h4><p>Imagine solutions that have never existed before</p></div>
-    <div class="skill-card fade-in"><span class="skill-emoji">🚀</span><h4>Leadership</h4><p>Step up, inspire others, and own your decisions</p></div>
-    <div class="skill-card fade-in"><span class="skill-emoji">🤝</span><h4>Collaboration</h4><p>Work in teams and achieve more together</p></div>
-    <div class="skill-card fade-in"><span class="skill-emoji">💬</span><h4>Communication</h4><p>Speak confidently and share ideas clearly</p></div>
+    <div class="skill-card fade-in"><span class="skill-emoji">??</span><h4>Critical Thinking</h4><p>Analyze problems deeply and think before you act</p></div>
+    <div class="skill-card fade-in"><span class="skill-emoji">??</span><h4>Creativity</h4><p>Imagine solutions that have never existed before</p></div>
+    <div class="skill-card fade-in"><span class="skill-emoji">??</span><h4>Leadership</h4><p>Step up, inspire others, and own your decisions</p></div>
+    <div class="skill-card fade-in"><span class="skill-emoji">??</span><h4>Collaboration</h4><p>Work in teams and achieve more together</p></div>
+    <div class="skill-card fade-in"><span class="skill-emoji">??</span><h4>Communication</h4><p>Speak confidently and share ideas clearly</p></div>
   </div>
 </section>
 
@@ -449,19 +1035,23 @@
       <h2 class="section-title">Made for <em>Students</em><br>Like <span>You</span></h2>
       <p class="section-sub">NavaChar is designed for students who want to make a difference but don't know where to start.</p>
       <ul class="who-list">
-        <li><div class="who-check">🎒</div><div><strong>School students aged 12–16</strong><span>Class 7 to Class 10 — the perfect age to start thinking like an entrepreneur.</span></div></li>
-        <li><div class="who-check">🌆</div><div><strong>From underserved & backward communities</strong><span>We prioritize students from communities often left out of innovation conversations.</span></div></li>
-        <li><div class="who-check">🔥</div><div><strong>Curious & action-oriented thinkers</strong><span>If you've ever thought "why does this problem exist?", this program is for you.</span></div></li>
-        <li><div class="who-check">🌟</div><div><strong>No prior experience needed</strong><span>You just need the drive to learn and the courage to try. We'll teach everything else.</span></div></li>
+        <li><div class="who-check">??</div><div><strong>School students aged 12–16</strong><span>Class 7 to Class 10 — the perfect age to start thinking like an entrepreneur.</span></div></li>
+        <li><div class="who-check">??</div><div><strong>From underserved & backward communities</strong><span>We prioritize students from communities often left out of innovation conversations.</span></div></li>
+        <li><div class="who-check">??</div><div><strong>Curious & action-oriented thinkers</strong><span>If you've ever thought "why does this problem exist?", this program is for you.</span></div></li>
+        <li><div class="who-check">??</div><div><strong>No prior experience needed</strong><span>You just need the drive to learn and the courage to try. We'll teach everything else.</span></div></li>
       </ul>
     </div>
     <div class="fade-in">
       <div class="who-cta-box">
-        <span class="big-emoji">🌟</span>
+        <span class="big-emoji">??</span>
         <h3>Ready to Build Your <em>Own</em> Opportunity?</h3>
         <p>Seats are limited and applications are open now. Don't wait — the world needs your ideas today, not tomorrow.</p>
-        <a href="https://forms.gle/2GY6RqVd5CRkgDxc7" target="_blank" class="btn-primary" style="font-size:16px; padding:16px 36px;">Apply Now — It's Free! 🚀</a>
-        <p style="margin-top:18px; font-size:13px; color:var(--text-muted);">📍 New Delhi &nbsp;|&nbsp; 🗓 Limited Seats Available</p>
+        <a href="https://forms.gle/2GY6RqVd5CRkgDxc7" target="_blank" class="btn-primary" style="font-size:16px; padding:16px 36px;">Apply Now — It's Free! ??</a>
+        <p style="margin-top:18px; font-size:13px; color:var(--text-muted);">?? New Delhi &nbsp;|&nbsp; ?? Limited Seats Available</p>
+        <div style="margin-top:20px; padding-top:20px; border-top:2px dashed #FFD0A8;">
+          <p style="font-size:14px; color:var(--text-muted); margin-bottom:14px;">?? Are you a teacher or school representative?</p>
+          <a href="#" onclick="openInterestForm();return false;" class="btn-secondary" style="font-size:14px; padding:12px 28px; display:inline-block;">Bring NavaChar to Your School ?</a>
+        </div>
       </div>
     </div>
   </div>
@@ -475,11 +1065,11 @@
     <p class="section-sub" style="margin:0 auto;">From curious student to confident changemaker — here's your path.</p>
   </div>
   <div class="steps-wrap">
-    <div class="step-row fade-in"><div class="step-num">1</div><div class="step-body"><h3>📝 Apply & Get Selected</h3><p>Fill out our simple application form. We look for students who are curious, motivated, and excited to make a difference — no prior experience needed.</p></div></div>
-    <div class="step-row fade-in"><div class="step-num">2</div><div class="step-body"><h3>🧭 Community Observation Walk</h3><p>Students are guided to walk through their neighborhood and identify 3–5 real problems that affect people daily. This is where every innovation begins — with eyes wide open.</p></div></div>
-    <div class="step-row fade-in"><div class="step-num">3</div><div class="step-body"><h3>💡 Idea Workshop Sessions</h3><p>Through facilitated workshops, students pick their most impactful problem, brainstorm solutions, and develop their best idea using design thinking tools.</p></div></div>
-    <div class="step-row fade-in"><div class="step-num">4</div><div class="step-body"><h3>🔨 Build Your Solution</h3><p>Time to get hands-on! Students create a prototype or model of their solution — whether it's a product, service, or campaign. Real ideas become real things.</p></div></div>
-    <div class="step-row fade-in"><div class="step-num">5</div><div class="step-body"><h3>🎤 Demo Day — Present to the World</h3><p>Students present their solutions in front of peers, mentors, and community members. It's your moment to shine, pitch your idea, and inspire others with your vision.</p></div></div>
+    <div class="step-row fade-in"><div class="step-num">1</div><div class="step-body"><h3>?? Apply & Get Selected</h3><p>Fill out our simple application form. We look for students who are curious, motivated, and excited to make a difference — no prior experience needed.</p></div></div>
+    <div class="step-row fade-in"><div class="step-num">2</div><div class="step-body"><h3>?? Community Observation Walk</h3><p>Students are guided to walk through their neighborhood and identify 3–5 real problems that affect people daily. This is where every innovation begins — with eyes wide open.</p></div></div>
+    <div class="step-row fade-in"><div class="step-num">3</div><div class="step-body"><h3>?? Idea Workshop Sessions</h3><p>Through facilitated workshops, students pick their most impactful problem, brainstorm solutions, and develop their best idea using design thinking tools.</p></div></div>
+    <div class="step-row fade-in"><div class="step-num">4</div><div class="step-body"><h3>?? Build Your Solution</h3><p>Time to get hands-on! Students create a prototype or model of their solution — whether it's a product, service, or campaign. Real ideas become real things.</p></div></div>
+    <div class="step-row fade-in"><div class="step-num">5</div><div class="step-body"><h3>?? Demo Day — Present to the World</h3><p>Students present their solutions in front of peers, mentors, and community members. It's your moment to shine, pitch your idea, and inspire others with your vision.</p></div></div>
   </div>
 </section>
 
@@ -500,9 +1090,9 @@
   <div class="apply-circ" style="width:280px;height:280px;top:-90px;left:-70px;"></div>
   <div class="apply-circ" style="width:180px;height:180px;bottom:-50px;right:8%;"></div>
   <div class="apply-circ" style="width:100px;height:100px;top:28%;right:4%;"></div>
-  <h2>Don't Wait for Opportunities —<br>Build Them. 🚀</h2>
+  <h2>Don't Wait for Opportunities —<br>Build Them. ??</h2>
   <p>Join NavaChar today and take the first step toward becoming the innovator your community needs. Applications are open and completely free.</p>
-  <a href="https://forms.gle/2GY6RqVd5CRkgDxc7" target="_blank" class="btn-white">Apply Now — It's Free! ✦</a>
+  <a href="https://forms.gle/2GY6RqVd5CRkgDxc7" target="_blank" class="btn-white">Apply Now — It's Free! ?</a>
 </section>
 
 <!-- CONTACT -->
@@ -510,30 +1100,40 @@
   <div class="contact-grid">
     <div class="fade-in">
       <div class="section-tag">Get In Touch</div>
-      <h2 style="font-family:'Fredoka One',cursive; font-size:36px; color:var(--text); margin-bottom:12px;">Let's <span style="color:var(--blue);">Connect</span> 👋</h2>
-      <p style="font-size:15.5px; color:var(--text-muted); line-height:1.75; margin-bottom:34px;">Have questions about NavaChar? Want to partner with us, bring sessions to your school, or just say hello? We'd love to hear from you!</p>
+      <h2 style="font-family:'Fredoka One',cursive; font-size:36px; color:var(--text); margin-bottom:12px;">Let's <span style="color:var(--blue);">Connect</span> ??</h2>
+      <p style="font-size:15.5px; color:var(--text-muted); line-height:1.75; margin-bottom:24px;">Have questions about NavaChar? Want to partner with us, bring sessions to your school, or just say hello? We'd love to hear from you!</p>
+      <a href="#" onclick="openPartnerForm();return false;" style="
+        display:inline-flex; align-items:center; gap:8px;
+        background:linear-gradient(135deg,var(--blue),var(--blue-dark));
+        color:white; padding:12px 26px; border-radius:50px;
+        font-weight:800; font-size:14px; text-decoration:none;
+        box-shadow:0 4px 16px rgba(26,92,255,0.3); margin-bottom:28px;
+        transition:transform 0.2s, box-shadow 0.2s;
+      " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+        ?? Partner with NavaChar
+      </a>
       <div class="contact-item">
-        <div class="contact-icon">📧</div>
-        <div><strong>Email Us</strong><a href="mailto:sukantsahoo124@gmail.com">sukantsahoo124@gmail.com</a></div>
+        <div class="contact-icon">??</div>
+        <div><strong>Email Us</strong><a href="/cdn-cgi/l/email-protection#0576706e646b7176h7qVpeaSVDasEcDcZv9RgVm4LNrbrp6a68"><span class="__cf_email__" data-cfemail="83f0f6e8e2edf7f0e2ebececb2b1b7c3e4eee2eaefade0ecee">[email&#160;protected]</span></a></div>
       </div>
       <div class="contact-item">
-        <div class="contact-icon orange">📞</div>
+        <div class="contact-icon orange">??</div>
         <div><strong>Call Us</strong><a href="tel:7008397301">+91 70083 97301</a></div>
       </div>
       <div class="contact-item">
-        <div class="contact-icon">📍</div>
+        <div class="contact-icon">??</div>
         <div><strong>Location</strong><span>New Delhi, India</span></div>
       </div>
     </div>
     <div class="fade-in">
       <div class="contact-form-box">
-        <h3>✉️ Send Us a Message</h3>
+        <h3>?? Send Us a Message</h3>
         <div id="form-success" style="display:none; background:#E8FFF0; border:2px solid #22A855; border-radius:12px; padding:18px 20px; text-align:center; margin-bottom:16px;">
-          <div style="font-size:32px; margin-bottom:8px;">🎉</div>
+          <div style="font-size:32px; margin-bottom:8px;">??</div>
           <strong style="color:#22A855; font-size:16px;">Message Sent!</strong>
           <p style="color:#2d6a4f; font-size:14px; margin-top:6px;">Thanks for reaching out! We'll get back to you soon.</p>
         </div>
-        <form id="contact-form" action="https://formspree.io/f/sukantsahoo124@gmail.com" method="POST" onsubmit="handleSubmit(event)">
+        <form id="contact-form" onsubmit="handleSubmit(event)">
           <div class="form-group"><label>Your Name</label><input type="text" name="name" placeholder="e.g. Priya Sharma" required></div>
           <div class="form-group"><label>Email Address</label><input type="email" name="email" placeholder="e.g. priya@school.in" required></div>
           <div class="form-group"><label>I am a...</label>
@@ -542,8 +1142,8 @@
               <option>Teacher / School</option><option>NGO / Partner</option><option>Other</option>
             </select>
           </div>
-          <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about yourself or your query..."></textarea></div>
-          <button type="submit" class="btn-form" id="submit-btn">Send Message 🚀</button>
+          <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about yourself or your query..." required></textarea></div>
+          <button type="submit" class="btn-form" id="submit-btn">Send Message ??</button>
         </form>
       </div>
     </div>
@@ -571,55 +1171,1047 @@
       <h4>Get Involved</h4>
       <ul>
         <li><a href="https://forms.gle/2GY6RqVd5CRkgDxc7" target="_blank">Apply as Student</a></li>
-        <li><a href="#contact">Partner with Us</a></li>
-        <li><a href="#contact">Bring to Your School</a></li>
-        <li><a href="mailto:sukantsahoo124@gmail.com">Volunteer</a></li>
+        <li><a href="#" onclick="openPartnerForm();return false;">Partner with Us</a></li>
+        <li><a href="#" onclick="openInterestForm();return false;">Bring to Your School</a></li>
+        <li><a href="#" onclick="openVolunteerForm();return false;">Volunteer</a></li>
+        <li><a href="#" onclick="openDonateModal();return false;">Donate</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 NavaChar. Built with <span>♥</span> for India's future innovators.</p>
-    <p>New Delhi, India &nbsp;|&nbsp; <a href="mailto:sukantsahoo124@gmail.com" style="color:rgba(255,255,255,0.45);text-decoration:none;">sukantsahoo124@gmail.com</a></p>
+    <p>© 2025 NavaChar. Built with <span>?</span> for India's future innovators.</p>
+    <p>New Delhi, India &nbsp;|&nbsp; <a href="/cdn-cgi/l/email-protection#285b5d4349465c5b49404747191a1c684f45494144064b4745" style="color:rgba(255,255,255,0.45);text-decoration:none;"><span class="__cf_email__" data-cfemail="c5b6b0aea4abb1b6a4adaaaaf4f7f185a2a8a4aca9eba6aaa8">[email&#160;protected]</span></a></p>
   </div>
 </footer>
 
-<script>
-  const obs = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0.1});
-  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
-  document.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener('click',e=>{
-      const t=document.querySelector(a.getAttribute('href'));
-      if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  /* Scroll animations */
+  const obs = new IntersectionObserver(
+    es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  /* Smooth nav scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
     });
   });
 
-  async function handleSubmit(e) {
+  /* Contact form - Formspree */
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
     e.preventDefault();
-    const form = document.getElementById('contact-form');
-    const btn = document.getElementById('submit-btn');
+
+    var form       = document.getElementById('contact-form');
+    var btn        = document.getElementById('submit-btn');
+    var successBox = document.getElementById('form-success');
+
+    var name    = form.querySelector('[name="name"]').value.trim();
+    var email   = form.querySelector('[name="email"]').value.trim();
+    var role    = form.querySelector('[name="role"]').value;
+    var message = form.querySelector('[name="message"]').value.trim();
+
+    if (!name || !email || !message) {
+      alert('Please fill in all fields before sending.');
+      return;
+    }
+
     btn.textContent = 'Sending...';
     btn.disabled = true;
-    const data = new FormData(form);
-    try {
-      const res = await fetch('https://formspree.io/f/sukantsahoo124@gmail.com', {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
-      if (res.ok) {
-        form.style.display = 'none';
-        document.getElementById('form-success').style.display = 'block';
-      } else {
-        btn.textContent = 'Send Message 🚀';
-        btn.disabled = false;
-        alert('Oops! Something went wrong. Please try again or email us directly.');
+    btn.style.opacity = '0.7';
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://formspree.io/f/mreogoqg', true);
+    xhr.setRequestHeader('Accept', 'application/json');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200 || xhr.status === 201) {
+          form.style.display = 'none';
+          successBox.style.display = 'block';
+          successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          btn.textContent = 'Send Message ??';
+          btn.disabled = false;
+          btn.style.opacity = '1';
+          alert('Could not send message. Please email us directly at sukantsahoo124@gmail.com');
+        }
       }
-    } catch(err) {
-      btn.textContent = 'Send Message 🚀';
+    };
+
+    xhr.onerror = function() {
+      btn.textContent = 'Send Message ??';
       btn.disabled = false;
-      alert('Network error. Please check your connection and try again.');
-    }
+      btn.style.opacity = '1';
+      alert('Network error. Please email us directly at sukantsahoo124@gmail.com');
+    };
+
+    xhr.send(JSON.stringify({ name: name, email: email, role: role, message: message }));
+  });
+
+
+  /* -- Interest Form Modal Logic -- */
+  function openInterestForm() {
+    document.getElementById('interest-modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    ifSetStep(0);
   }
+  function closeInterestForm() {
+    document.getElementById('interest-modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  // Close on backdrop click
+  document.getElementById('interest-modal-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeInterestForm();
+  });
+
+  let ifCurrentStep = 0;
+
+  function ifGoToStep(n) {
+    if (n > ifCurrentStep && !ifValidateStep(ifCurrentStep)) return;
+    ifSetStep(n);
+  }
+
+  function ifSetStep(n) {
+    document.querySelectorAll('.if-step-view').forEach(v => v.classList.remove('if-active'));
+    document.getElementById('if-step-' + n).classList.add('if-active');
+    document.querySelectorAll('.if-step-item').forEach((item, i) => {
+      item.classList.remove('if-active', 'done');
+      if (i < n) item.classList.add('done');
+      else if (i === n) item.classList.add('if-active');
+    });
+    for (let i = 0; i < 3; i++) {
+      const c = document.getElementById('if-conn-' + i);
+      if (c) c.classList.toggle('done', i < n);
+    }
+    const pct = ((n + 1) / 4) * 100;
+    document.getElementById('if-progressBar').style.width = pct + '%';
+    ifCurrentStep = n;
+    document.getElementById('interest-modal-overlay').scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function ifValidateStep(step) {
+    let ok = true;
+    function chk(fieldId, inputId, validator) {
+      const field = document.getElementById(fieldId);
+      const el    = document.getElementById(inputId);
+      if (!field || !el) return;
+      const val   = el.value.trim();
+      const valid = validator ? validator(val) : val.length > 0;
+      field.classList.toggle('invalid', !valid);
+      if (!valid) ok = false;
+    }
+    if (step === 0) {
+      chk('if-f-school-name', 'if-schoolName');
+      chk('if-f-address',     'if-address');
+      chk('if-f-city',        'if-city');
+      chk('if-f-state',       'if-state');
+      chk('if-f-board',       'if-board');
+      chk('if-f-school-type', 'if-schoolType');
+    } else if (step === 1) {
+      chk('if-f-fname',       'if-fname');
+      chk('if-f-lname',       'if-lname');
+      chk('if-f-designation', 'if-designation');
+      chk('if-f-email',       'if-email', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+      chk('if-f-phone',       'if-phone', v => v.replace(/\s/g,'').length >= 10);
+    } else if (step === 2) {
+      const checked = document.querySelectorAll('#if-f-grades .if-checkbox-row input:checked');
+      const gradesOk = checked.length > 0;
+      document.getElementById('if-grades-error').style.display = gradesOk ? 'none' : 'block';
+      if (!gradesOk) ok = false;
+      chk('if-f-students', 'if-numStudents', v => v.length > 0 && parseInt(v) > 0);
+      chk('if-f-duration', 'if-duration');
+      chk('if-f-timing',   'if-timing');
+    } else if (step === 3) {
+      chk('if-f-goals', 'if-goals');
+      const consentOk = document.getElementById('if-consent').checked;
+      document.getElementById('if-consent-error').style.display = consentOk ? 'none' : 'block';
+      if (!consentOk) ok = false;
+    }
+    return ok;
+  }
+
+  function ifSubmitForm() {
+    if (!ifValidateStep(3)) return;
+
+    /* Collect all data and send to Formspree */
+    const grades  = [...document.querySelectorAll('#if-f-grades .if-checkbox-row input:checked')].map(i=>i.value).join(', ');
+    const topics  = [...document.querySelectorAll('#if-step-2 .if-checkbox-group:last-of-type input:checked')].map(i=>i.value).join(', ');
+    const callTime = document.querySelector('input[name="if-callTime"]:checked');
+    const source   = document.querySelector('input[name="if-source"]:checked');
+
+    const payload = {
+      _subject: 'New School Interest Form — NavaChar',
+      school_name:   document.getElementById('if-schoolName').value,
+      address:       document.getElementById('if-address').value,
+      city:          document.getElementById('if-city').value,
+      state:         document.getElementById('if-state').value,
+      board:         document.getElementById('if-board').value,
+      school_type:   document.getElementById('if-schoolType').value,
+      website:       document.getElementById('if-website').value,
+      contact_name:  document.getElementById('if-fname').value + ' ' + document.getElementById('if-lname').value,
+      designation:   document.getElementById('if-designation').value,
+      email:         document.getElementById('if-email').value,
+      phone:         document.getElementById('if-phone').value,
+      best_call_time: callTime ? callTime.value : 'Not specified',
+      grade_levels:  grades,
+      num_students:  document.getElementById('if-numStudents').value,
+      duration:      document.getElementById('if-duration').value,
+      timing:        document.getElementById('if-timing').value,
+      topics:        topics || 'None selected',
+      goals:         document.getElementById('if-goals').value,
+      challenges:    document.getElementById('if-challenges').value,
+      questions:     document.getElementById('if-questions').value,
+      heard_from:    source ? source.value : 'Not specified'
+    };
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://formspree.io/f/mreogoqg', true);
+    xhr.setRequestHeader('Accept', 'application/json');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        document.querySelectorAll('.if-step-view').forEach(v => v.classList.remove('if-active'));
+        document.getElementById('if-step-success').classList.add('if-active');
+        document.getElementById('if-stepper').style.opacity = '0';
+        document.querySelector('.if-progress-wrap').style.opacity = '0';
+      }
+    };
+    xhr.send(JSON.stringify(payload));
+  }
+
+
+
+  /* -- NGO Partner Form Modal -- */
+  function openPartnerForm() {
+    document.getElementById('np-modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    npSetStep(0);
+  }
+  function closePartnerForm() {
+    document.getElementById('np-modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('np-modal-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closePartnerForm();
+  });
+
+  // Character counter for vision textarea
+  (function() {
+    var va = document.getElementById('np-vision');
+    var vc = document.getElementById('np-vision-count');
+    if (va && vc) va.addEventListener('input', function() { vc.textContent = va.value.length + ' / 500'; });
+  })();
+
+  let npCurrentStep = 0;
+
+  function npGoNext(n) {
+    if (n > npCurrentStep && !npValidateStep(npCurrentStep)) return;
+    npSetStep(n);
+  }
+
+  function npSetStep(n) {
+    document.querySelectorAll('.np-step-view').forEach(v => v.classList.remove('np-active'));
+    const target = document.getElementById('np-step-' + n) || document.getElementById('np-step-success');
+    if (target) target.classList.add('np-active');
+    for (let i = 0; i < 5; i++) {
+      const pill = document.getElementById('np-pill-' + i);
+      if (!pill) continue;
+      pill.classList.remove('active', 'done');
+      if (i < n) pill.classList.add('done');
+      else if (i === n) pill.classList.add('active');
+    }
+    const pct = ((n + 1) / 6) * 100;
+    document.getElementById('np-progressFill').style.width = pct + '%';
+    npCurrentStep = n;
+    document.getElementById('np-modal-overlay').scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function npValidateStep(step) {
+    let ok = true;
+    function chk(fieldId, inputId, validator) {
+      const field = document.getElementById(fieldId);
+      const el    = document.getElementById(inputId);
+      if (!field || !el) return;
+      const valid = validator ? validator(el.value.trim()) : el.value.trim().length > 0;
+      field.classList.toggle('invalid', !valid);
+      if (!valid) ok = false;
+    }
+    function chkRadio(name, errId) {
+      const checked = document.querySelector('input[name="' + name + '"]:checked');
+      const err = document.getElementById(errId);
+      if (err) err.style.display = checked ? 'none' : 'block';
+      if (!checked) ok = false;
+    }
+    function chkGroup(containerId, errId) {
+      const checked = document.querySelectorAll('#' + containerId + ' input:checked');
+      const err = document.getElementById(errId);
+      if (err) err.style.display = checked.length > 0 ? 'none' : 'block';
+      if (checked.length === 0) ok = false;
+    }
+    if (step === 0) {
+      chk('np-f-org-name', 'np-orgName');
+      chkRadio('np-orgType', 'np-org-type-error');
+      chk('np-f-founded', 'np-founded', v => v.length > 0 && parseInt(v) >= 1900 && parseInt(v) <= 2025);
+      chk('np-f-hq', 'np-hqCity');
+      chk('np-f-mission', 'np-mission');
+    } else if (step === 1) {
+      chk('np-f-fname', 'np-fname');
+      chk('np-f-lname', 'np-lname');
+      chk('np-f-title', 'np-jobTitle');
+      chk('np-f-email', 'np-email', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+      chk('np-f-phone', 'np-phone', v => v.replace(/\s/g,'').length >= 10);
+    } else if (step === 2) {
+      chkGroup('np-focus-group', 'np-focus-error');
+      chk('np-f-beneficiaries', 'np-beneficiaries');
+      chk('np-f-geographies', 'np-geographies');
+    } else if (step === 3) {
+      chkGroup('np-collab-group', 'np-collab-error');
+      chk('np-f-timeline', 'np-timeline');
+      chk('np-f-scale', 'np-scale');
+      chk('np-f-vision', 'np-vision', v => v.length >= 20);
+    } else if (step === 4) {
+      const consent = document.getElementById('np-consent');
+      const ok2 = consent && consent.checked;
+      const err = document.getElementById('np-consent-error');
+      if (err) err.style.display = ok2 ? 'none' : 'block';
+      if (!ok2) ok = false;
+    }
+    return ok;
+  }
+
+  function npSubmitForm() {
+    if (!npValidateStep(4)) return;
+
+    const focusAreas = [...document.querySelectorAll('#np-focus-group input:checked')].map(i => i.value).join(', ');
+    const collabTypes = [...document.querySelectorAll('#np-collab-group input:checked')].map(i => i.value).join(', ');
+    const contactPref = document.querySelector('input[name="np-contactPref"]:checked');
+    const ageGroup    = document.querySelector('input[name="np-ageGroup"]:checked');
+    const prevCollab  = document.querySelector('input[name="np-prevCollab"]:checked');
+    const source      = document.querySelector('input[name="np-source"]:checked');
+
+    const payload = {
+      _subject:       'New NGO Partnership Interest — NavaChar',
+      org_name:       document.getElementById('np-orgName').value,
+      org_type:       (document.querySelector('input[name="np-orgType"]:checked') || {}).value || 'Not specified',
+      founded:        document.getElementById('np-founded').value,
+      registration:   document.getElementById('np-registration').value,
+      website:        document.getElementById('np-website').value,
+      hq_city:        document.getElementById('np-hqCity').value,
+      mission:        document.getElementById('np-mission').value,
+      contact_name:   document.getElementById('np-fname').value + ' ' + document.getElementById('np-lname').value,
+      job_title:      document.getElementById('np-jobTitle').value,
+      email:          document.getElementById('np-email').value,
+      phone:          document.getElementById('np-phone').value,
+      linkedin:       document.getElementById('np-linkedin').value,
+      contact_pref:   contactPref ? contactPref.value : 'Not specified',
+      focus_areas:    focusAreas,
+      beneficiaries:  document.getElementById('np-beneficiaries').value,
+      geographies:    document.getElementById('np-geographies').value,
+      geo_details:    document.getElementById('np-geoDetails').value,
+      age_group:      ageGroup ? ageGroup.value : 'Not specified',
+      collab_types:   collabTypes,
+      timeline:       document.getElementById('np-timeline').value,
+      scale:          document.getElementById('np-scale').value,
+      vision:         document.getElementById('np-vision').value,
+      prev_collab:    prevCollab ? prevCollab.value : 'Not specified',
+      prev_details:   document.getElementById('np-prevDetails').value,
+      heard_from:     source ? source.value : 'Not specified',
+      anything_else:  document.getElementById('np-anythingElse').value
+    };
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://formspree.io/f/mreogoqg', true);
+    xhr.setRequestHeader('Accept', 'application/json');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        document.querySelectorAll('.np-step-view').forEach(v => v.classList.remove('np-active'));
+        document.getElementById('np-step-success').classList.add('np-active');
+        document.querySelector('.np-pills').style.opacity = '0';
+        document.querySelector('.np-progress-wrap').style.opacity = '0';
+      }
+    };
+    xhr.send(JSON.stringify(payload));
+  }
+
+  // Clear invalid on input
+  document.querySelectorAll('.np-root input, .np-root select, .np-root textarea').forEach(el => {
+    el.addEventListener('change', function() {
+      const field = el.closest('.np-field');
+      if (field) field.classList.remove('invalid');
+    });
+  });
+
+  /* -- Volunteer Modal -- */
+  function openVolunteerForm() {
+    document.getElementById('vol-modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeVolunteerForm() {
+    document.getElementById('vol-modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('vol-modal-overlay').addEventListener('click', function(e) {
+      if (e.target === this) closeVolunteerForm();
+    });
+    document.getElementById('donate-modal-overlay').addEventListener('click', function(e) {
+      if (e.target === this) closeDonateModal();
+    });
+  });
+
+  function submitVolunteerForm(e) {
+    e.preventDefault();
+    var form = document.getElementById('vol-form');
+    var name = document.getElementById('vol-name').value.trim();
+    var email = document.getElementById('vol-email').value.trim();
+    if (!name || !email) { alert('Please fill in required fields.'); return; }
+    document.getElementById('vol-form').style.display = 'none';
+    document.getElementById('vol-success').style.display = 'block';
+  }
+
+  /* -- Donate Modal -- */
+  function openDonateModal() {
+    document.getElementById('donate-modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDonateModal() {
+    document.getElementById('donate-modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.donate-amt').forEach(function(el) {
+    el.addEventListener('click', function() {
+      document.querySelectorAll('.donate-amt').forEach(a => a.classList.remove('selected'));
+      el.classList.add('selected');
+    });
+  });
+
 </script>
-</body>
-</html>
+
+<!-- -- VOLUNTEER MODAL -- -->
+<div id="vol-modal-overlay">
+  <div class="vol-modal-inner">
+    <button class="vol-modal-close" onclick="closeVolunteerForm()" title="Close">?</button>
+    <div class="vol-modal-body">
+      <div class="vol-head">
+        <span class="vol-emoji">??</span>
+        <h3>Volunteer with NavaChar</h3>
+        <p>Share your skills, time, and passion with young innovators. We'd love to have you on board!</p>
+      </div>
+      <div id="vol-success">
+        <span class="big-emoji">??</span>
+        <h4>Thank you for stepping up!</h4>
+        <p>We've received your interest and will reach out within 5 working days to explore how you can contribute.</p>
+      </div>
+      <form id="vol-form" onsubmit="submitVolunteerForm(event)">
+        <div class="vol-grid-2">
+          <div class="vol-form-group">
+            <label>First Name *</label>
+            <input type="text" id="vol-name" placeholder="Your name" required />
+          </div>
+          <div class="vol-form-group">
+            <label>Last Name</label>
+            <input type="text" id="vol-lname" placeholder="Last name" />
+          </div>
+        </div>
+        <div class="vol-form-group">
+          <label>Email Address *</label>
+          <input type="email" id="vol-email" placeholder="you@example.com" required />
+        </div>
+        <div class="vol-form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="vol-phone" placeholder="+91 98765 43210" />
+        </div>
+        <div class="vol-form-group">
+          <label>How would you like to help?</label>
+          <select id="vol-role">
+            <option value="">Select a role</option>
+            <option>Mentor / Guide students</option>
+            <option>Facilitate workshops</option>
+            <option>Guest speaker / Expert talk</option>
+            <option>Help with outreach &amp; communications</option>
+            <option>Assist at events / Demo Days</option>
+            <option>Curriculum &amp; content development</option>
+            <option>Open to any role</option>
+          </select>
+        </div>
+        <div class="vol-form-group">
+          <label>Your background or skills (optional)</label>
+          <textarea id="vol-skills" placeholder="e.g. I'm a product designer with 5 years experience and love working with youth..."></textarea>
+        </div>
+        <button type="submit" class="vol-submit-btn">Submit Volunteer Interest ??</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- -- DONATE MODAL -- -->
+<div id="donate-modal-overlay">
+  <div class="donate-modal-inner">
+    <button class="donate-modal-close" onclick="closeDonateModal()" title="Close">?</button>
+    <div class="donate-modal-body">
+      <span class="big-emoji">??</span>
+      <h3>Support NavaChar</h3>
+      <p>Your donation helps us reach more students from underserved communities and run free programmes that change lives.</p>
+      <div class="donate-amounts">
+        <div class="donate-amt">
+          <span class="amt-num">?500</span>
+          <span class="amt-label">Study materials for 1 student</span>
+        </div>
+        <div class="donate-amt selected">
+          <span class="amt-num">?2,000</span>
+          <span class="amt-label">Sponsors 1 workshop session</span>
+        </div>
+        <div class="donate-amt">
+          <span class="amt-num">?5,000</span>
+          <span class="amt-label">Funds a full Demo Day</span>
+        </div>
+      </div>
+      <a href="mailto:sukantsahoo124@gmail.com?subject=I%20want%20to%20donate%20to%20NavaChar" class="donate-cta">
+        ?? Donate Now — Contact Us to Proceed
+      </a>
+      <p class="donate-note">We'll connect you with payment details and a receipt. Questions? Email <strong>sukantsahoo124@gmail.com</strong></p>
+    </div>
+  </div>
+</div>
+<div id="interest-modal-overlay">
+  <div class="interest-modal-inner">
+    <button class="interest-modal-close" onclick="closeInterestForm()" title="Close">?</button>
+    <div class="interest-modal-body">
+      <div class="if-root">
+
+        <div class="if-hero">
+          <div class="if-badge">School Interest Form</div>
+          <h2>Bring <span>NavaChar</span> to Your School</h2>
+          <p>Help us understand your school's needs and interest in our entrepreneurship programme. Takes about 5 minutes.</p>
+        </div>
+
+        <div class="if-progress-wrap">
+          <div class="if-progress-bar" id="if-progressBar" style="width:25%"></div>
+        </div>
+
+        <div class="if-stepper" id="if-stepper">
+          <div class="if-step-item if-active" data-step="0"><div class="if-step-circle">1</div><span class="if-step-label">School</span></div>
+          <div class="if-connector" id="if-conn-0"></div>
+          <div class="if-step-item" data-step="1"><div class="if-step-circle">2</div><span class="if-step-label">Contact</span></div>
+          <div class="if-connector" id="if-conn-1"></div>
+          <div class="if-step-item" data-step="2"><div class="if-step-circle">3</div><span class="if-step-label">Programme</span></div>
+          <div class="if-connector" id="if-conn-2"></div>
+          <div class="if-step-item" data-step="3"><div class="if-step-circle">4</div><span class="if-step-label">Goals</span></div>
+        </div>
+
+        <div class="if-card">
+
+          <!-- Step 1: School Info -->
+          <div class="if-step-view if-active" id="if-step-0">
+            <div class="if-section-header"><h3>School Information</h3><p>Tell us about your school so we can tailor the right programme.</p></div>
+            <div class="if-form-grid">
+              <div class="if-field if-full" id="if-f-school-name">
+                <label>School name <span class="req">*</span></label>
+                <input type="text" id="if-schoolName" placeholder="e.g. Delhi Public School, R.K. Puram" />
+                <span class="if-error">Please enter the school name.</span>
+              </div>
+              <div class="if-field if-full" id="if-f-address">
+                <label>School address <span class="req">*</span></label>
+                <input type="text" id="if-address" placeholder="Street, Colony, City, State" />
+                <span class="if-error">Please enter the school address.</span>
+              </div>
+              <div class="if-field" id="if-f-city">
+                <label>City <span class="req">*</span></label>
+                <input type="text" id="if-city" placeholder="e.g. New Delhi" />
+                <span class="if-error">Please enter the city.</span>
+              </div>
+              <div class="if-field" id="if-f-state">
+                <label>State <span class="req">*</span></label>
+                <select id="if-state">
+                  <option value="">Select state</option>
+                  <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option>
+                  <option>Bihar</option><option>Chhattisgarh</option><option>Delhi</option>
+                  <option>Goa</option><option>Gujarat</option><option>Haryana</option>
+                  <option>Himachal Pradesh</option><option>Jharkhand</option><option>Karnataka</option>
+                  <option>Kerala</option><option>Madhya Pradesh</option><option>Maharashtra</option>
+                  <option>Manipur</option><option>Meghalaya</option><option>Mizoram</option>
+                  <option>Nagaland</option><option>Odisha</option><option>Punjab</option>
+                  <option>Rajasthan</option><option>Sikkim</option><option>Tamil Nadu</option>
+                  <option>Telangana</option><option>Tripura</option><option>Uttar Pradesh</option>
+                  <option>Uttarakhand</option><option>West Bengal</option><option>Other</option>
+                </select>
+                <span class="if-error">Please select a state.</span>
+              </div>
+              <div class="if-field" id="if-f-board">
+                <label>Board affiliation <span class="req">*</span></label>
+                <select id="if-board">
+                  <option value="">Select board</option>
+                  <option>CBSE</option><option>ICSE / ISC</option><option>IB (International Baccalaureate)</option>
+                  <option>IGCSE / Cambridge</option><option>State Board</option><option>Other</option>
+                </select>
+                <span class="if-error">Please select the board.</span>
+              </div>
+              <div class="if-field" id="if-f-school-type">
+                <label>School type <span class="req">*</span></label>
+                <select id="if-schoolType">
+                  <option value="">Select type</option>
+                  <option>Private / Independent</option><option>Government</option>
+                  <option>Government-Aided</option><option>International School</option>
+                </select>
+                <span class="if-error">Please select the school type.</span>
+              </div>
+              <div class="if-field if-full">
+                <label>School website <span style="font-weight:400;color:#6B6254">(optional)</span></label>
+                <input type="text" id="if-website" placeholder="https://www.yourschool.edu.in" />
+              </div>
+            </div>
+            <div class="if-nav-row">
+              <button class="if-btn if-btn-back if-btn-ghost">Back</button>
+              <button class="if-btn if-btn-next" onclick="ifGoToStep(1)">Next: Contact Details ?</button>
+            </div>
+          </div>
+
+          <!-- Step 2: Contact Person -->
+          <div class="if-step-view" id="if-step-1">
+            <div class="if-section-header"><h3>Contact Person</h3><p>Who should we reach out to about scheduling and logistics?</p></div>
+            <div class="if-form-grid">
+              <div class="if-field" id="if-f-fname"><label>First name <span class="req">*</span></label><input type="text" id="if-fname" placeholder="First name" /><span class="if-error">Required field.</span></div>
+              <div class="if-field" id="if-f-lname"><label>Last name <span class="req">*</span></label><input type="text" id="if-lname" placeholder="Last name" /><span class="if-error">Required field.</span></div>
+              <div class="if-field if-full" id="if-f-designation">
+                <label>Designation / Role <span class="req">*</span></label>
+                <select id="if-designation">
+                  <option value="">Select designation</option>
+                  <option>Principal</option><option>Vice Principal</option><option>Head of School</option>
+                  <option>Academic Coordinator</option><option>Activity / Events Coordinator</option>
+                  <option>Teacher / Educator</option><option>Trustee / Management</option><option>Other</option>
+                </select>
+                <span class="if-error">Please select your designation.</span>
+              </div>
+              <div class="if-field if-full" id="if-f-email"><label>Official email address <span class="req">*</span></label><input type="email" id="if-email" placeholder="you@yourschool.edu.in" /><span class="if-error">Please enter a valid email.</span></div>
+              <div class="if-field" id="if-f-phone"><label>Phone number <span class="req">*</span></label><input type="tel" id="if-phone" placeholder="+91 98765 43210" maxlength="15" /><span class="if-error">Please enter a valid phone number.</span></div>
+              <div class="if-field"><label>Alternate number <span style="font-weight:400;color:#6B6254">(optional)</span></label><input type="tel" id="if-altPhone" placeholder="+91 98765 43210" maxlength="15" /></div>
+              <div class="if-field if-full">
+                <label>Best time to call <span style="font-weight:400;color:#6B6254">(optional)</span></label>
+                <div class="if-radio-group">
+                  <label class="if-radio-btn"><input type="radio" name="if-callTime" value="morning" /><span>Morning (9–12 AM)</span></label>
+                  <label class="if-radio-btn"><input type="radio" name="if-callTime" value="afternoon" /><span>Afternoon (12–4 PM)</span></label>
+                  <label class="if-radio-btn"><input type="radio" name="if-callTime" value="evening" /><span>Evening (4–7 PM)</span></label>
+                  <label class="if-radio-btn"><input type="radio" name="if-callTime" value="anytime" /><span>Anytime</span></label>
+                </div>
+              </div>
+            </div>
+            <div class="if-nav-row">
+              <button class="if-btn if-btn-back" onclick="ifGoToStep(0)">? Back</button>
+              <button class="if-btn if-btn-next" onclick="ifGoToStep(2)">Next: Programme Preferences ?</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Programme Preferences -->
+          <div class="if-step-view" id="if-step-2">
+            <div class="if-section-header"><h3>Programme Preferences</h3><p>Help us design the right experience for your students.</p></div>
+            <div class="if-form-grid">
+              <div class="if-field if-full">
+                <label>Target grade levels <span class="req">*</span></label>
+                <p class="if-hint">Select all that apply</p>
+                <div class="if-checkbox-group" id="if-f-grades">
+                  <label class="if-checkbox-row"><input type="checkbox" value="6-7" /><span>Grades 6–7 (Middle School)</span></label>
+                  <label class="if-checkbox-row"><input type="checkbox" value="8-9" /><span>Grades 8–9 (Upper Middle School)</span></label>
+                  <label class="if-checkbox-row"><input type="checkbox" value="10" /><span>Grade 10 (Secondary)</span></label>
+                  <label class="if-checkbox-row"><input type="checkbox" value="11-12" /><span>Grades 11–12 (Senior Secondary)</span></label>
+                </div>
+                <span class="if-error" id="if-grades-error" style="display:none">Please select at least one grade level.</span>
+              </div>
+              <div class="if-field" id="if-f-students"><label>Expected no. of students <span class="req">*</span></label><input type="number" id="if-numStudents" placeholder="e.g. 80" min="1" max="2000" /><span class="if-error">Please enter the expected number.</span></div>
+              <div class="if-field" id="if-f-duration">
+                <label>Preferred programme duration <span class="req">*</span></label>
+                <select id="if-duration">
+                  <option value="">Select duration</option>
+                  <option>Single session (1–2 hours)</option><option>Half-day workshop (3–4 hours)</option>
+                  <option>Full-day workshop</option><option>Multi-day programme (2–3 days)</option>
+                  <option>Weekly sessions over a semester</option><option>Open to recommendation</option>
+                </select>
+                <span class="if-error">Please select a duration preference.</span>
+              </div>
+              <div class="if-field if-full" id="if-f-timing">
+                <label>Preferred timing <span class="req">*</span></label>
+                <select id="if-timing">
+                  <option value="">Select timing</option>
+                  <option>During regular school hours</option><option>After school (extracurricular slot)</option>
+                  <option>Weekend</option><option>School event / fest</option>
+                  <option>Summer / winter break</option><option>Flexible / open to suggestion</option>
+                </select>
+                <span class="if-error">Please select a timing preference.</span>
+              </div>
+              <div class="if-field if-full">
+                <label>Topics of interest <span style="font-weight:400;color:#6B6254">(optional)</span></label>
+                <p class="if-hint">Select any that resonate</p>
+                <div class="if-checkbox-group">
+                  <label class="if-checkbox-row"><input type="checkbox" value="ideation" /><span>Idea generation &amp; creative thinking</span></label>
+                  <label class="if-checkbox-row"><input type="checkbox" value="design-thinking" /><span>Design thinking &amp; problem-solving</span></label>
+                  <label class="if-checkbox-row"><input type="checkbox" value="business-basics" /><span>Business basics &amp; financial literacy</span></label>
+                  <label class="if-checkbox-row"><input type="checkbox" value="pitching" /><span>Pitching &amp; communication skills</span></label>
+                  <label class="if-checkbox-row"><input type="checkbox" value="leadership" /><span>Leadership &amp; team dynamics</span></label>
+                  <label class="if-checkbox-row"><input type="checkbox" value="social-enterprise" /><span>Social entrepreneurship &amp; impact</span></label>
+                  <label class="if-checkbox-row"><input type="checkbox" value="tech-startup" /><span>Technology &amp; startups</span></label>
+                </div>
+              </div>
+            </div>
+            <div class="if-nav-row">
+              <button class="if-btn if-btn-back" onclick="ifGoToStep(1)">? Back</button>
+              <button class="if-btn if-btn-next" onclick="ifGoToStep(3)">Next: Your Goals ?</button>
+            </div>
+          </div>
+
+          <!-- Step 4: Goals & Submit -->
+          <div class="if-step-view" id="if-step-3">
+            <div class="if-section-header"><h3>Your Goals &amp; Final Details</h3><p>Share what you hope your students will take away.</p></div>
+            <div class="if-form-grid">
+              <div class="if-field if-full">
+                <label>How did you hear about NavaChar? <span style="font-weight:400;color:#6B6254">(optional)</span></label>
+                <div class="if-radio-group">
+                  <label class="if-radio-btn"><input type="radio" name="if-source" value="social" /><span>Social media</span></label>
+                  <label class="if-radio-btn"><input type="radio" name="if-source" value="referral" /><span>Word of mouth</span></label>
+                  <label class="if-radio-btn"><input type="radio" name="if-source" value="event" /><span>Event / conference</span></label>
+                  <label class="if-radio-btn"><input type="radio" name="if-source" value="search" /><span>Internet search</span></label>
+                  <label class="if-radio-btn"><input type="radio" name="if-source" value="partner" /><span>Partner organisation</span></label>
+                  <label class="if-radio-btn"><input type="radio" name="if-source" value="other" /><span>Other</span></label>
+                </div>
+              </div>
+              <div class="if-field if-full" id="if-f-goals">
+                <label>What do you hope your students will gain? <span class="req">*</span></label>
+                <textarea id="if-goals" placeholder="e.g. We want students to develop a problem-solving mindset…" style="min-height:110px"></textarea>
+                <span class="if-error">Please share your goals for the students.</span>
+              </div>
+              <div class="if-field if-full">
+                <label>Any specific challenges or context? <span style="font-weight:400;color:#6B6254">(optional)</span></label>
+                <textarea id="if-challenges" placeholder="e.g. Many of our students come from first-generation learner households…" style="min-height:80px"></textarea>
+              </div>
+              <div class="if-field if-full">
+                <label>Any questions for the NavaChar team? <span style="font-weight:400;color:#6B6254">(optional)</span></label>
+                <textarea id="if-questions" placeholder="Feel free to ask anything about the programme, costs, logistics…" style="min-height:80px"></textarea>
+              </div>
+              <div class="if-field if-full">
+                <label class="if-checkbox-row" style="border-color:#E0D8CC;background:#FDFAF5">
+                  <input type="checkbox" id="if-consent" style="accent-color:#0B7A6A" />
+                  <span style="font-size:0.8rem;line-height:1.5">I confirm that the information provided is accurate and I consent to NavaChar contacting the school regarding this interest.</span>
+                </label>
+                <span class="if-error" id="if-consent-error" style="display:none">Please tick the box to confirm.</span>
+              </div>
+            </div>
+            <div class="if-nav-row">
+              <button class="if-btn if-btn-back" onclick="ifGoToStep(2)">? Back</button>
+              <button class="if-btn if-btn-submit" onclick="ifSubmitForm()">Submit Interest ?</button>
+            </div>
+          </div>
+
+          <!-- Success -->
+          <div class="if-step-view" id="if-step-success">
+            <div class="if-success">
+              <div class="if-success-icon">
+                <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+                  <circle cx="18" cy="18" r="18" fill="#D6F5F0"/>
+                  <path d="M10 18.5L15.5 24L26 13" stroke="#0B7A6A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="if-tag-pill" style="margin-bottom:1rem;display:inline-block">Form received</span>
+              <h3>Thank you for your interest!</h3>
+              <p style="margin-top:0.75rem">The NavaChar team will review your submission and reach out within <strong>3–5 working days</strong> to discuss next steps and schedule a discovery call.</p>
+              <p style="margin-top:1rem;font-size:0.8rem">In the meantime, reach us at <a href="/cdn-cgi/l/email-protection#c0b3b5aba1aeb4b3a1a8afaff1f2f480a7ada1a9aceea3afad" style="color:#E8860A;text-decoration:none;font-weight:600"><span class="__cf_email__" data-cfemail="fc8f89979d92888f9d949393cdcec8bc9b919d9590d29f9391">[email&#160;protected]</span></a></p>
+              <button class="if-btn if-btn-next" style="margin-top:1.5rem" onclick="closeInterestForm()">Close ?</button>
+            </div>
+          </div>
+
+        </div><!-- /.if-card -->
+      </div><!-- /.if-root -->
+    </div><!-- /.interest-modal-body -->
+  </div><!-- /.interest-modal-inner -->
+</div><!-- /#interest-modal-overlay -->
+
+<!-- -- NGO PARTNER FORM MODAL -- -->
+<div id="np-modal-overlay">
+  <div class="np-modal-inner">
+    <button class="np-modal-close" onclick="closePartnerForm()" title="Close">?</button>
+    <div class="np-modal-body">
+      <div class="np-root">
+
+        <div class="np-hero">
+          <div class="np-badge"><span class="np-dot"></span>NGO Partnership Form</div>
+          <h2>Let's build something <em>meaningful</em> together.</h2>
+          <p>We're looking for mission-aligned organisations to co-create and co-amplify entrepreneurship experiences for young people across India.</p>
+        </div>
+
+        <div class="np-progress-wrap">
+          <div class="np-progress-fill" id="np-progressFill" style="width:20%"></div>
+        </div>
+
+        <div class="np-pills">
+          <span class="np-pill active" id="np-pill-0">Organisation</span>
+          <span class="np-pill" id="np-pill-1">Contact</span>
+          <span class="np-pill" id="np-pill-2">Work &amp; Reach</span>
+          <span class="np-pill" id="np-pill-3">Collaboration</span>
+          <span class="np-pill" id="np-pill-4">Commitment</span>
+        </div>
+
+        <div class="np-card">
+
+          <!-- Step 1: Organisation -->
+          <div class="np-step-view np-active" id="np-step-0">
+            <div class="np-card-header">
+              <div><h3>About Your Organisation</h3><p>Help us understand who you are and what you stand for.</p></div>
+              <span class="np-step-counter">Step 1 of 5</span>
+            </div>
+            <div class="np-card-body">
+              <div class="np-form-grid">
+                <div class="np-field np-full" id="np-f-org-name">
+                  <label>Organisation name <span class="np-req">*</span></label>
+                  <input type="text" id="np-orgName" placeholder="e.g. Pratham, Teach For India, Deshpande Foundation" />
+                  <span class="np-error">Please enter your organisation's name.</span>
+                </div>
+                <div class="np-field np-full" id="np-f-org-type">
+                  <label>Type of organisation <span class="np-req">*</span></label>
+                  <div class="np-check-grid" id="np-org-type-group">
+                    <label class="np-check-tile"><input type="radio" name="np-orgType" value="ngo" /><div><div class="np-tile-label">Registered NGO / Trust</div><div class="np-tile-sub">Sec 8, Society, or Trust</div></div></label>
+                    <label class="np-check-tile"><input type="radio" name="np-orgType" value="foundation" /><div><div class="np-tile-label">Corporate Foundation</div><div class="np-tile-sub">CSR-backed entity</div></div></label>
+                    <label class="np-check-tile"><input type="radio" name="np-orgType" value="social-enterprise" /><div><div class="np-tile-label">Social Enterprise</div><div class="np-tile-sub">For-profit with social mission</div></div></label>
+                    <label class="np-check-tile"><input type="radio" name="np-orgType" value="govt" /><div><div class="np-tile-label">Govt / Quasi-Govt Body</div><div class="np-tile-sub">Municipal, state, or central</div></div></label>
+                    <label class="np-check-tile"><input type="radio" name="np-orgType" value="academic" /><div><div class="np-tile-label">Academic Institution</div><div class="np-tile-sub">University, college, or research</div></div></label>
+                    <label class="np-check-tile"><input type="radio" name="np-orgType" value="other" /><div><div class="np-tile-label">Other</div><div class="np-tile-sub">Tell us in the next step</div></div></label>
+                  </div>
+                  <span class="np-error" id="np-org-type-error" style="display:none">Please select your organisation type.</span>
+                </div>
+                <div class="np-field" id="np-f-founded">
+                  <label>Year founded <span class="np-req">*</span></label>
+                  <input type="number" id="np-founded" placeholder="e.g. 2012" min="1900" max="2025" />
+                  <span class="np-error">Please enter the founding year.</span>
+                </div>
+                <div class="np-field">
+                  <label>Registration / 12A number <span style="font-weight:400;color:var(--np-muted)">(optional)</span></label>
+                  <input type="text" id="np-registration" placeholder="e.g. 12A-MH-2013-001234" />
+                </div>
+                <div class="np-field np-full">
+                  <label>Website <span style="font-weight:400;color:var(--np-muted)">(optional)</span></label>
+                  <input type="url" id="np-website" placeholder="https://yourorganisation.org" />
+                </div>
+                <div class="np-field np-full" id="np-f-hq">
+                  <label>Headquartered in <span class="np-req">*</span></label>
+                  <input type="text" id="np-hqCity" placeholder="City, State — e.g. Pune, Maharashtra" />
+                  <span class="np-error">Please enter your HQ location.</span>
+                </div>
+                <div class="np-field np-full" id="np-f-mission">
+                  <label>Mission statement / one-liner <span class="np-req">*</span></label>
+                  <textarea id="np-mission" placeholder="In one or two sentences, what does your organisation exist to do?" style="min-height:80px"></textarea>
+                  <span class="np-error">Please share your mission statement.</span>
+                </div>
+              </div>
+            </div>
+            <div class="np-card-footer">
+              <button class="np-btn np-btn-back np-btn-ghost">Back</button>
+              <button class="np-btn np-btn-next" onclick="npGoNext(1)">Next ?</button>
+            </div>
+          </div>
+
+          <!-- Step 2: Contact -->
+          <div class="np-step-view" id="np-step-1">
+            <div class="np-card-header">
+              <div><h3>Point of Contact</h3><p>Who should the NavaChar team reach out to?</p></div>
+              <span class="np-step-counter">Step 2 of 5</span>
+            </div>
+            <div class="np-card-body">
+              <div class="np-form-grid">
+                <div class="np-field" id="np-f-fname"><label>First name <span class="np-req">*</span></label><input type="text" id="np-fname" placeholder="First name" /><span class="np-error">Required.</span></div>
+                <div class="np-field" id="np-f-lname"><label>Last name <span class="np-req">*</span></label><input type="text" id="np-lname" placeholder="Last name" /><span class="np-error">Required.</span></div>
+                <div class="np-field np-full" id="np-f-title"><label>Title / Role <span class="np-req">*</span></label><input type="text" id="np-jobTitle" placeholder="e.g. Programmes Director, CEO, Partnership Manager" /><span class="np-error">Please enter your title.</span></div>
+                <div class="np-field np-full" id="np-f-email"><label>Work email <span class="np-req">*</span></label><input type="email" id="np-email" placeholder="you@organisation.org" /><span class="np-error">Please enter a valid email address.</span></div>
+                <div class="np-field" id="np-f-phone"><label>Phone <span class="np-req">*</span></label><input type="tel" id="np-phone" placeholder="+91 98765 43210" maxlength="15" /><span class="np-error">Please enter a valid phone number.</span></div>
+                <div class="np-field"><label>LinkedIn <span style="font-weight:400;color:var(--np-muted)">(optional)</span></label><input type="url" id="np-linkedin" placeholder="https://linkedin.com/in/yourname" /></div>
+                <div class="np-field np-full">
+                  <label>Preferred contact method <span style="font-weight:400;color:var(--np-muted)">(optional)</span></label>
+                  <div class="np-radio-grid-3">
+                    <label class="np-radio-row"><input type="radio" name="np-contactPref" value="email" /><span>Email</span></label>
+                    <label class="np-radio-row"><input type="radio" name="np-contactPref" value="call" /><span>Phone call</span></label>
+                    <label class="np-radio-row"><input type="radio" name="np-contactPref" value="whatsapp" /><span>WhatsApp</span></label>
+                    <label class="np-radio-row"><input type="radio" name="np-contactPref" value="video" /><span>Video call</span></label>
+                    <label class="np-radio-row"><input type="radio" name="np-contactPref" value="inperson" /><span>In person</span></label>
+                    <label class="np-radio-row"><input type="radio" name="np-contactPref" value="any" /><span>No preference</span></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="np-card-footer">
+              <button class="np-btn np-btn-back" onclick="npGoNext(0)">? Back</button>
+              <button class="np-btn np-btn-next" onclick="npGoNext(2)">Next ?</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Work & Reach -->
+          <div class="np-step-view" id="np-step-2">
+            <div class="np-card-header">
+              <div><h3>Your Work &amp; Reach</h3><p>Tell us about the communities and causes you serve.</p></div>
+              <span class="np-step-counter">Step 3 of 5</span>
+            </div>
+            <div class="np-card-body">
+              <div class="np-form-grid">
+                <div class="np-field np-full" id="np-f-focus">
+                  <label>Primary focus areas <span class="np-req">*</span></label>
+                  <p class="np-hint" style="margin-bottom:8px">Select all that apply</p>
+                  <div class="np-check-grid" id="np-focus-group">
+                    <label class="np-check-tile"><input type="checkbox" value="education" /><div><div class="np-tile-label">Education &amp; Literacy</div></div></label>
+                    <label class="np-check-tile"><input type="checkbox" value="livelihood" /><div><div class="np-tile-label">Livelihoods &amp; Skills</div></div></label>
+                    <label class="np-check-tile"><input type="checkbox" value="youth" /><div><div class="np-tile-label">Youth Development</div></div></label>
+                    <label class="np-check-tile"><input type="checkbox" value="gender" /><div><div class="np-tile-label">Gender &amp; Inclusion</div></div></label>
+                    <label class="np-check-tile"><input type="checkbox" value="rural" /><div><div class="np-tile-label">Rural Development</div></div></label>
+                    <label class="np-check-tile"><input type="checkbox" value="environment" /><div><div class="np-tile-label">Environment &amp; Climate</div></div></label>
+                    <label class="np-check-tile"><input type="checkbox" value="health" /><div><div class="np-tile-label">Health &amp; Wellbeing</div></div></label>
+                    <label class="np-check-tile"><input type="checkbox" value="enterprise" /><div><div class="np-tile-label">Entrepreneurship &amp; Enterprise</div></div></label>
+                  </div>
+                  <span class="np-error" id="np-focus-error" style="display:none">Please select at least one focus area.</span>
+                </div>
+                <div class="np-field" id="np-f-beneficiaries">
+                  <label>Annual beneficiaries served <span class="np-req">*</span></label>
+                  <select id="np-beneficiaries"><option value="">Select range</option><option>Under 500</option><option>500–2,000</option><option>2,000–10,000</option><option>10,000–50,000</option><option>50,000+</option></select>
+                  <span class="np-error">Please select a range.</span>
+                </div>
+                <div class="np-field" id="np-f-geographies">
+                  <label>Geographies of operation <span class="np-req">*</span></label>
+                  <select id="np-geographies"><option value="">Select scope</option><option>Single city / district</option><option>Multi-city within one state</option><option>Multi-state (regional)</option><option>Pan-India</option><option>International</option></select>
+                  <span class="np-error">Please select your geography.</span>
+                </div>
+                <div class="np-field np-full">
+                  <label>States / cities where you operate <span style="font-weight:400;color:var(--np-muted)">(optional)</span></label>
+                  <input type="text" id="np-geoDetails" placeholder="e.g. Maharashtra, Rajasthan, Karnataka — primarily tier 2 &amp; 3 towns" />
+                </div>
+                <div class="np-field np-full">
+                  <label>Age groups you primarily serve <span style="font-weight:400;color:var(--np-muted)">(optional)</span></label>
+                  <div class="np-radio-grid-3">
+                    <label class="np-radio-row"><input type="radio" name="np-ageGroup" value="children" /><span>Children (5–12)</span></label>
+                    <label class="np-radio-row"><input type="radio" name="np-ageGroup" value="adolescent" /><span>Adolescents (13–17)</span></label>
+                    <label class="np-radio-row"><input type="radio" name="np-ageGroup" value="youth" /><span>Youth (18–25)</span></label>
+                    <label class="np-radio-row"><input type="radio" name="np-ageGroup" value="adult" /><span>Adults (25+)</span></label>
+                    <label class="np-radio-row"><input type="radio" name="np-ageGroup" value="all" /><span>All ages</span></label>
+                    <label class="np-radio-row"><input type="radio" name="np-ageGroup" value="women" /><span>Women &amp; girls</span></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="np-card-footer">
+              <button class="np-btn np-btn-back" onclick="npGoNext(1)">? Back</button>
+              <button class="np-btn np-btn-next" onclick="npGoNext(3)">Next ?</button>
+            </div>
+          </div>
+
+          <!-- Step 4: Collaboration -->
+          <div class="np-step-view" id="np-step-3">
+            <div class="np-card-header">
+              <div><h3>Collaboration Vision</h3><p>How do you see us working together?</p></div>
+              <span class="np-step-counter">Step 4 of 5</span>
+            </div>
+            <div class="np-card-body">
+              <div class="np-callout">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8.25" stroke="currentColor" stroke-width="1.5"/><path d="M9 8v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="5.5" r="0.75" fill="currentColor"/></svg>
+                <p>We welcome all forms of partnership — co-facilitation, community access, funding support, resource sharing, and more. There are no wrong answers here.</p>
+              </div>
+              <div class="np-form-grid">
+                <div class="np-field np-full" id="np-f-collab-type">
+                  <label>How would you like to collaborate? <span class="np-req">*</span></label>
+                  <p class="np-hint" style="margin-bottom:8px">Select all that interest you</p>
+                  <div class="np-check-grid" id="np-collab-group">
+                    <label class="np-check-tile"><input type="checkbox" value="co-facilitate" /><div><div class="np-tile-label">Co-facilitate programmes</div><div class="np-tile-sub">Our content, your community</div></div></label>
+                    <label class="np-check-tile"><input type="checkbox" value="community-access" /><div><div class="np-tile-label">Provide community access</div><div class="np-tile-sub">Connect us to your beneficiaries</div></div></label>
+                    <label class="np-check-tile"><input type="checkbox" value="content" /><div><div class="np-tile-label">Co-create content</div><div class="np-tile-sub">Build curriculum together</div></div></label>
+                    <label class="np-check-tile"><input type="checkbox" value="funding" /><div><div class="np-tile-label">Funding / grants</div><div class="np-tile-sub">Support programme delivery</div></div></label>
+                    <label class="np-check-tile"><input type="checkbox" value="mentors" /><div><div class="np-tile-label">Provide mentors / experts</div><div class="np-tile-sub">Connect students to role models</div></div></label>
+                    <label class="np-check-tile"><input type="checkbox" value="venue" /><div><div class="np-tile-label">Venue / logistics</div><div class="np-tile-sub">Host events and workshops</div></div></label>
+                    <label class="np-check-tile"><input type="checkbox" value="referral" /><div><div class="np-tile-label">Referral &amp; amplification</div><div class="np-tile-sub">Spread the word in our network</div></div></label>
+                    <label class="np-check-tile"><input type="checkbox" value="research" /><div><div class="np-tile-label">Research &amp; impact</div><div class="np-tile-sub">Jointly measure outcomes</div></div></label>
+                  </div>
+                  <span class="np-error" id="np-collab-error" style="display:none">Please select at least one collaboration type.</span>
+                </div>
+                <div class="np-field" id="np-f-timeline">
+                  <label>Desired timeline to begin <span class="np-req">*</span></label>
+                  <select id="np-timeline"><option value="">Select timeline</option><option>Within 1 month</option><option>1–3 months</option><option>3–6 months</option><option>6–12 months</option><option>Beyond 1 year / exploratory</option></select>
+                  <span class="np-error">Please select a timeline.</span>
+                </div>
+                <div class="np-field" id="np-f-scale">
+                  <label>Scale of intended collaboration <span class="np-req">*</span></label>
+                  <select id="np-scale"><option value="">Select scale</option><option>Pilot (1–2 programmes)</option><option>Small (3–10 sessions/year)</option><option>Medium (ongoing, 1 district)</option><option>Large (multi-city, sustained)</option><option>Open to discussion</option></select>
+                  <span class="np-error">Please select a scale.</span>
+                </div>
+                <div class="np-field np-full" id="np-f-vision">
+                  <div class="np-char-row">
+                    <label>Describe your collaboration vision <span class="np-req">*</span></label>
+                    <span class="np-char-count" id="np-vision-count">0 / 500</span>
+                  </div>
+                  <textarea id="np-vision" maxlength="500" placeholder="What does a successful partnership with NavaChar look like to you?" style="min-height:120px"></textarea>
+                  <span class="np-error">Please describe your vision (at least a sentence or two).</span>
+                </div>
+              </div>
+            </div>
+            <div class="np-card-footer">
+              <button class="np-btn np-btn-back" onclick="npGoNext(2)">? Back</button>
+              <button class="np-btn np-btn-next" onclick="npGoNext(4)">Next ?</button>
+            </div>
+          </div>
+
+          <!-- Step 5: Commitment -->
+          <div class="np-step-view" id="np-step-4">
+            <div class="np-card-header">
+              <div><h3>Final Details &amp; Submit</h3><p>Almost there — a few last questions before we connect.</p></div>
+              <span class="np-step-counter">Step 5 of 5</span>
+            </div>
+            <div class="np-card-body">
+              <div class="np-form-grid">
+                <div class="np-field np-full">
+                  <label>Collaborated with similar entrepreneurship programmes before? <span style="font-weight:400;color:var(--np-muted)">(optional)</span></label>
+                  <div class="np-radio-grid-2">
+                    <label class="np-radio-row"><input type="radio" name="np-prevCollab" value="yes" /><span>Yes — we have experience</span></label>
+                    <label class="np-radio-row"><input type="radio" name="np-prevCollab" value="no" /><span>No — this would be a first</span></label>
+                  </div>
+                </div>
+                <div class="np-field np-full">
+                  <label>If yes, please share briefly <span style="font-weight:400;color:var(--np-muted)">(optional)</span></label>
+                  <textarea id="np-prevDetails" placeholder="Which organisations or programmes? What did you learn?" style="min-height:80px"></textarea>
+                </div>
+                <div class="np-field np-full">
+                  <label>How did you hear about NavaChar? <span style="font-weight:400;color:var(--np-muted)">(optional)</span></label>
+                  <div class="np-radio-grid-2">
+                    <label class="np-radio-row"><input type="radio" name="np-source" value="referral" /><span>Referral / word of mouth</span></label>
+                    <label class="np-radio-row"><input type="radio" name="np-source" value="social" /><span>Social media</span></label>
+                    <label class="np-radio-row"><input type="radio" name="np-source" value="event" /><span>Event or conference</span></label>
+                    <label class="np-radio-row"><input type="radio" name="np-source" value="search" /><span>Online search</span></label>
+                    <label class="np-radio-row"><input type="radio" name="np-source" value="press" /><span>Media / press</span></label>
+                    <label class="np-radio-row"><input type="radio" name="np-source" value="other" /><span>Other</span></label>
+                  </div>
+                </div>
+                <div class="np-field np-full">
+                  <label>Anything else you'd like us to know? <span style="font-weight:400;color:var(--np-muted)">(optional)</span></label>
+                  <textarea id="np-anythingElse" placeholder="Questions, context, ideas, past work — anything that helps us understand your organisation better." style="min-height:90px"></textarea>
+                </div>
+                <div class="np-divider np-full"></div>
+                <div class="np-field np-full">
+                  <label class="np-check-tile" id="np-consent-tile">
+                    <input type="checkbox" id="np-consent" />
+                    <div><div class="np-tile-label">I confirm this information is accurate and consent to NavaChar reaching out to discuss this collaboration.</div><div class="np-tile-sub">We will never share your details with third parties.</div></div>
+                  </label>
+                  <span class="np-error" id="np-consent-error" style="display:none;margin-top:4px">Please confirm before submitting.</span>
+                </div>
+              </div>
+            </div>
+            <div class="np-card-footer">
+              <button class="np-btn np-btn-back" onclick="npGoNext(3)">? Back</button>
+              <button class="np-btn np-btn-submit" onclick="npSubmitForm()">Submit Interest ?</button>
+            </div>
+          </div>
+
+          <!-- Success -->
+          <div class="np-step-view" id="np-step-success">
+            <div class="np-success">
+              <div class="np-success-emblem">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><path d="M8 19L14.5 25.5L28 12" stroke="#1A5CFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="np-success-tag">Partnership request received</div>
+              <h3>We're excited to connect! ??</h3>
+              <p style="margin-top:0.75rem">The NavaChar team will review your submission and reach out within <strong>5 working days</strong> to explore what a partnership could look like.</p>
+              <div class="np-next-steps">
+                <div class="np-next-step-card"><div class="np-next-step-num">Step 01</div><p>Our team reviews your submission and researches your organisation.</p></div>
+                <div class="np-next-step-card"><div class="np-next-step-num">Step 02</div><p>We schedule a 30-minute discovery call to explore alignment and shared goals.</p></div>
+                <div class="np-next-step-card"><div class="np-next-step-num">Step 03</div><p>We co-design a partne
